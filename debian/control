@@ -1,0 +1,4121 @@
+Source: openerp7-addons-bundle
+Section: net
+Priority: optional
+Maintainer: Enrico Weigelt, metux ITS <weigelt@metux.de>
+Build-Depends: debhelper (>= 7.0.50~), python, rsync, dos2unix
+Standards-Version: 3.9.1
+
+
+Package: openerp7-addons-account
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base-setup,
+  openerp7-addons-product,
+  openerp7-addons-analytic,
+  openerp7-addons-process,
+  openerp7-addons-board,
+  openerp7-addons-edi,
+  ${misc:Depends}
+Conflicts: openerp-addons-account
+Recommends: openerp7-server
+Description: OpenERP-7 module: account
+  Accounting and Financial Management.
+  ====================================
+  .
+  Financial and accounting module that covers:
+  --------------------------------------------
+  * General Accounting
+  * Cost/Analytic accounting
+  * Third party accounting
+  * Taxes management
+  * Budgets
+  * Customer and Supplier Invoices
+  * Bank statements
+  * Reconciliation process by partner
+  .
+  Creates a dashboard for accountants that includes:
+  --------------------------------------------------
+  * List of Customer Invoice to Approve
+  * Company Analysis
+  * Graph of Treasury
+  .
+  The processes like maintaining of general ledger is done through the defined financial Journals (entry move line orgrouping is maintained through journal)
+  for a particular financial year and for preparation of vouchers there is a module named account_voucher.
+
+Package: openerp7-addons-account-accountant
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account-voucher,
+  ${misc:Depends}
+Conflicts: openerp-addons-account-accountant
+Recommends: openerp7-server
+Description: OpenERP-7 module: account_accountant
+  Accounting Access Rights
+  ========================
+  It gives the Administrator user access to all accounting features such as journal items and the chart of accounts.
+  .
+  It assigns manager and user access rights to the Administrator and only user rights to the Demo user.
+
+Package: openerp7-addons-account-analytic-analysis
+Section: net
+Architecture: all
+Depends:  openerp7-addons-hr-timesheet-invoice,
+  openerp7-addons-sale,
+  ${misc:Depends}
+Conflicts: openerp-addons-account-analytic-analysis
+Recommends: openerp7-server
+Description: OpenERP-7 module: account_analytic_analysis
+  This module is for modifying account analytic view to show important data to project manager of services companies.
+  ===================================================================================================================
+  .
+  Adds menu to show relevant information to each manager.You can also view the report of account analytic summary user-wise as well as month-wise.
+
+Package: openerp7-addons-account-analytic-default
+Section: net
+Architecture: all
+Depends:  openerp7-addons-sale-stock,
+  ${misc:Depends}
+Conflicts: openerp-addons-account-analytic-default
+Recommends: openerp7-server
+Description: OpenERP-7 module: account_analytic_default
+  Set default values for your analytic accounts.
+  ==============================================
+  .
+  Allows to automatically select analytic accounts based on criterions:
+  ---------------------------------------------------------------------
+  * Product
+  * Partner
+  * User
+  * Company
+  * Date
+
+Package: openerp7-addons-account-analytic-plans
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  openerp7-addons-account-analytic-default,
+  ${misc:Depends}
+Conflicts: openerp-addons-account-analytic-plans
+Recommends: openerp7-server
+Description: OpenERP-7 module: account_analytic_plans
+  This module allows to use several analytic plans according to the general journal.
+  ==================================================================================
+  .
+  Here multiple analytic lines are created when the invoice or the entries
+  are confirmed.
+  .
+  For example, you can define the following analytic structure:
+  -------------------------------------------------------------
+  * **Projects**
+  * Project 1
+  + SubProj 1.1
+  .
+  + SubProj 1.2
+  .
+  * Project 2
+  .
+  * **Salesman**
+  * Eric
+  .
+  * Fabien
+  .
+  Here, we have two plans: Projects and Salesman. An invoice line must be able to write analytic entries in the 2 plans: SubProj 1.1 and Fabien. The amount can also be split.
+  .
+  The following example is for an invoice that touches the two subprojects and assigned to one salesman:
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  **Plan1:**
+  .
+  * SubProject 1.1 : 50%
+  .
+  * SubProject 1.2 : 50%
+  .
+  **Plan2:**
+  Eric: 100%
+  .
+  So when this line of invoice will be confirmed, it will generate 3 analytic lines,for one account entry.
+  .
+  The analytic plan validates the minimum and maximum percentage at the time of creation of distribution models.
+
+Package: openerp7-addons-account-anglo-saxon
+Section: net
+Architecture: all
+Depends:  openerp7-addons-product,
+  openerp7-addons-purchase,
+  ${misc:Depends}
+Conflicts: openerp-addons-account-anglo-saxon
+Recommends: openerp7-server
+Description: OpenERP-7 module: account_anglo_saxon
+  This module supports the Anglo-Saxon accounting methodology by changing the accounting logic with stock transactions.
+  =====================================================================================================================
+  .
+  The difference between the Anglo-Saxon accounting countries and the Rhine
+  (or also called Continental accounting) countries is the moment of taking
+  the Cost of Goods Sold versus Cost of Sales. Anglo-Saxons accounting does
+  take the cost when sales invoice is created, Continental accounting will
+  take the cost at the moment the goods are shipped.
+  .
+  This module will add this functionality by using a interim account, to
+  store the value of shipped goods and will contra book this interim
+  account when the invoice is created to transfer this amount to the
+  debtor or creditor account. Secondly, price differences between actual
+  purchase price and fixed product standard price are booked on a separate
+  account.
+
+Package: openerp7-addons-account-asset
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  ${misc:Depends}
+Conflicts: openerp-addons-account-asset
+Recommends: openerp7-server
+Description: OpenERP-7 module: account_asset
+  Financial and accounting asset management.
+  ==========================================
+  .
+  This Module manages the assets owned by a company or an individual. It will keep
+  track of depreciation's occurred on those assets. And it allows to create Move's
+  of the depreciation lines.
+
+Package: openerp7-addons-account-bank-statement-extensions
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  ${misc:Depends}
+Conflicts: openerp-addons-account-bank-statement-extensions
+Recommends: openerp7-server
+Description: OpenERP-7 module: account_bank_statement_extensions
+  Module that extends the standard account_bank_statement_line object for improved e-banking support.
+  ===================================================================================================
+  .
+  This module adds:
+  -----------------
+  - valuta date
+  - batch payments
+  - traceability of changes to bank statement lines
+  - bank statement line views
+  - bank statements balances report
+  - performance improvements for digital import of bank statement (via
+  'ebanking_import' context flag)
+  - name_search on res.partner.bank enhanced to allow search on bank
+  and iban account numbers
+
+Package: openerp7-addons-account-budget
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  ${misc:Depends}
+Conflicts: openerp-addons-account-budget
+Recommends: openerp7-server
+Description: OpenERP-7 module: account_budget
+  This module allows accountants to manage analytic and crossovered budgets.
+  ==========================================================================
+  .
+  Once the Budgets are defined (in Invoicing/Budgets/Budgets), the Project Managers
+  can set the planned amount on each Analytic Account.
+  .
+  The accountant has the possibility to see the total of amount planned for each
+  Budget in order to ensure the total planned is not greater/lower than what he
+  planned for this Budget. Each list of record can also be switched to a graphical
+  view of it.
+  .
+  Three reports are available:
+  ----------------------------
+  1. The first is available from a list of Budgets. It gives the spreading, for
+  these Budgets, of the Analytic Accounts.
+  .
+  2. The second is a summary of the previous one, it only gives the spreading,
+  for the selected Budgets, of the Analytic Accounts.
+  .
+  3. The last one is available from the Analytic Chart of Accounts. It gives
+  the spreading, for the selected Analytic Accounts of Budgets.
+
+Package: openerp7-addons-account-cancel
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  ${misc:Depends}
+Conflicts: openerp-addons-account-cancel
+Recommends: openerp7-server
+Description: OpenERP-7 module: account_cancel
+  Allows canceling accounting entries.
+  ====================================
+  .
+  This module adds 'Allow Canceling Entries' field on form view of account journal.
+  If set to true it allows user to cancel entries & invoices.
+
+Package: openerp7-addons-account-chart
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  ${misc:Depends}
+Conflicts: openerp-addons-account-chart
+Recommends: openerp7-server
+Description: OpenERP-7 module: account_chart
+  Remove minimal account chart.
+  =============================
+  .
+  Deactivates minimal chart of accounts.
+
+Package: openerp7-addons-account-check-writing
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account-voucher,
+  ${misc:Depends}
+Conflicts: openerp-addons-account-check-writing
+Recommends: openerp7-server
+Description: OpenERP-7 module: account_check_writing
+  Module for the Check Writing and Check Printing.
+  ================================================
+
+Package: openerp7-addons-account-followup
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account-accountant,
+  openerp7-addons-mail,
+  ${misc:Depends}
+Conflicts: openerp-addons-account-followup
+Recommends: openerp7-server
+Description: OpenERP-7 module: account_followup
+  Module to automate letters for unpaid invoices, with multi-level recalls.
+  =========================================================================
+  .
+  You can define your multiple levels of recall through the menu:
+  ---------------------------------------------------------------
+  Configuration / Follow-Up Levels
+  .
+  Once it is defined, you can automatically print recalls every day through simply clicking on the menu:
+  ------------------------------------------------------------------------------------------------------
+  Payment Follow-Up / Send Email and letters
+  .
+  It will generate a PDF / send emails / set manual actions according to the the different levels
+  of recall defined. You can define different policies for different companies.
+  .
+  Note that if you want to check the follow-up level for a given partner/account entry, you can do from in the menu:
+  ------------------------------------------------------------------------------------------------------------------
+  Reporting / Accounting / **Follow-ups Analysis
+
+Package: openerp7-addons-account-payment
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  openerp7-addons-account-voucher,
+  ${misc:Depends}
+Conflicts: openerp-addons-account-payment
+Recommends: openerp7-server
+Description: OpenERP-7 module: account_payment
+  Module to manage the payment of your supplier invoices.
+  =======================================================
+  .
+  This module allows you to create and manage your payment orders, with purposes to
+  ---------------------------------------------------------------------------------
+  * serve as base for an easy plug-in of various automated payment mechanisms.
+  * provide a more efficient way to manage invoice payment.
+  .
+  Warning:
+  ~~~~~~~~
+  The confirmation of a payment order does _not_ create accounting entries, it just
+  records the fact that you gave your payment order to your bank. The booking of
+  your order must be encoded as usual through a bank statement. Indeed, it's only
+  when you get the confirmation from your bank that your order has been accepted
+  that you can book it in your accounting. To help you with that operation, you
+  have a new option to import payment orders as bank statement lines.
+
+Package: openerp7-addons-account-report-company
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  ${misc:Depends}
+Conflicts: openerp-addons-account-report-company
+Recommends: openerp7-server
+Description: OpenERP-7 module: account_report_company
+  Add an extra Company dimension on Invoices for consolidated Invoice Analysis
+  ============================================================================
+  .
+  By default Customer and Supplier invoices can be linked to a contact within
+  a company, but the company is not a direct reference in the database structure for
+  invoices. Journal Entries are however always linked to the company and not to
+  contacts, so that Accounts Payable and Receivable are always correct and consolidated
+  at company level.
+  .
+  When many different contacts/departments need to be invoiced within the same parent company,
+  this can make reporting by Company more difficult: reports are directly based on the
+  database structure and would not provide an aggregated company dimension.
+  .
+  This modules solves the problem by adding an explicit company reference on invoices,
+  automatically computed from the invoice contact, and use this new dimension
+  when grouping the list of Invoices or the Invoice Analysis report by Partner.
+  .
+  Note: this module will likely be removed for the next major OpenERP version and
+  directly integrated in the core accounting.
+
+Package: openerp7-addons-account-sequence
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  ${misc:Depends}
+Conflicts: openerp-addons-account-sequence
+Recommends: openerp7-server
+Description: OpenERP-7 module: account_sequence
+  This module maintains internal sequence number for accounting entries.
+  ======================================================================
+  .
+  Allows you to configure the accounting sequences to be maintained.
+  .
+  You can customize the following attributes of the sequence:
+  -----------------------------------------------------------
+  * Prefix
+  * Suffix
+  * Next Number
+  * Increment Number
+  * Number Padding
+
+Package: openerp7-addons-account-test
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  ${misc:Depends}
+Conflicts: openerp-addons-account-test
+Recommends: openerp7-server
+Description: OpenERP-7 module: account_test
+  Asserts on accounting.
+  ======================
+  With this module you can manually check consistencies and inconsistencies of accounting module from menu Reporting/Accounting/Accounting Tests.
+  .
+  You can write a query in order to create Consistency Test and you will get the result of the test
+  in PDF format which can be accessed by Menu Reporting -> Accounting Tests, then select the test
+  and print the report from Print button in header area.
+
+Package: openerp7-addons-account-voucher
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  ${misc:Depends}
+Conflicts: openerp-addons-account-voucher
+Recommends: openerp7-server
+Description: OpenERP-7 module: account_voucher
+  Invoicing & Payments by Accounting Voucher & Receipts
+  =====================================================
+  The specific and easy-to-use Invoicing system in OpenERP allows you to keep track of your accounting, even when you are not an accountant. It provides an easy way to follow up on your suppliers and customers.
+  .
+  You could use this simplified accounting in case you work with an (external) account to keep your books, and you still want to keep track of payments.
+  .
+  The Invoicing system includes receipts and vouchers (an easy way to keep track of sales and purchases). It also offers you an easy method of registering payments, without having to encode complete abstracts of account.
+  .
+  This module manages:
+  .
+  * Voucher Entry
+  * Voucher Receipt [Sales & Purchase]
+  * Voucher Payment [Customer & Supplier]
+
+Package: openerp7-addons-analytic
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  openerp7-addons-decimal-precision,
+  openerp7-addons-mail,
+  ${misc:Depends}
+Conflicts: openerp-addons-analytic
+Recommends: openerp7-server
+Description: OpenERP-7 module: analytic
+  Module for defining analytic accounting object.
+  ===============================================
+  .
+  In OpenERP, analytic accounts are linked to general accounts but are treated
+  totally independently. So, you can enter various different analytic operations
+  that have no counterpart in the general financial accounts.
+
+Package: openerp7-addons-analytic-contract-hr-expense
+Section: net
+Architecture: all
+Depends:  openerp7-addons-hr-expense,
+  openerp7-addons-account-analytic-analysis,
+  ${misc:Depends}
+Conflicts: openerp-addons-analytic-contract-hr-expense
+Recommends: openerp7-server
+Description: OpenERP-7 module: analytic_contract_hr_expense
+  This module is for modifying account analytic view to show some data related to the hr_expense module.
+  ======================================================================================================
+
+Package: openerp7-addons-analytic-user-function
+Section: net
+Architecture: all
+Depends:  openerp7-addons-hr-timesheet-sheet,
+  ${misc:Depends}
+Conflicts: openerp-addons-analytic-user-function
+Recommends: openerp7-server
+Description: OpenERP-7 module: analytic_user_function
+  This module allows you to define what is the default function of a specific user on a given account.
+  ====================================================================================================
+  .
+  This is mostly used when a user encodes his timesheet: the values are retrieved
+  and the fields are auto-filled. But the possibility to change these values is
+  still available.
+  .
+  Obviously if no data has been recorded for the current account, the default
+  value is given as usual by the employee data so that this module is perfectly
+  compatible with older configurations.
+
+Package: openerp7-addons-anonymization
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  ${misc:Depends}
+Conflicts: openerp-addons-anonymization
+Recommends: openerp7-server
+Description: OpenERP-7 module: anonymization
+  This module allows you to anonymize a database.
+  ===============================================
+  .
+  This module allows you to keep your data confidential for a given database.
+  This process is useful, if you want to use the migration process and protect
+  your own or your customer’s confidential data. The principle is that you run
+  an anonymization tool which will hide your confidential data(they are replaced
+  by ‘XXX’ characters). Then you can send the anonymized database to the migration
+  team. Once you get back your migrated database, you restore it and reverse the
+  anonymization process to recover your previous data.
+
+Package: openerp7-addons-association
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base-setup,
+  openerp7-addons-membership,
+  openerp7-addons-event,
+  ${misc:Depends}
+Conflicts: openerp-addons-association
+Recommends: openerp7-server
+Description: OpenERP-7 module: association
+  This module is to configure modules related to an association.
+  ==============================================================
+  .
+  It installs the profile for associations to manage events, registrations, memberships,
+  membership products (schemes).
+
+Package: openerp7-addons-audittrail
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  ${misc:Depends}
+Conflicts: openerp-addons-audittrail
+Recommends: openerp7-server
+Description: OpenERP-7 module: audittrail
+  This module lets administrator track every user operation on all the objects of the system.
+  ===========================================================================================
+  .
+  The administrator can subscribe to rules for read, write and delete on objects
+  and can check logs.
+
+Package: openerp7-addons-auth-crypt
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  ${misc:Depends}
+Conflicts: openerp-addons-auth-crypt
+Recommends: openerp7-server
+Description: OpenERP-7 module: auth_crypt
+  Ecrypted passwords
+  ==================
+  .
+  Interaction with LDAP authentication:
+  -------------------------------------
+  This module is currently not compatible with the ``user_ldap`` module and
+  will disable LDAP authentication completely if installed at the same time.
+
+Package: openerp7-addons-auth-ldap
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  ${misc:Depends}
+Conflicts: openerp-addons-auth-ldap
+Recommends: openerp7-server
+Description: OpenERP-7 module: auth_ldap
+  Adds support for authentication by LDAP server.
+  ===============================================
+  This module allows users to login with their LDAP username and password, and
+  will automatically create OpenERP users for them on the fly.
+  .
+  **Note:** This module only work on servers who have Python's ``ldap`` module installed.
+  .
+  Configuration:
+  --------------
+  After installing this module, you need to configure the LDAP parameters in the
+  Configuration tab of the Company details. Different companies may have different
+  LDAP servers, as long as they have unique usernames (usernames need to be unique
+  in OpenERP, even across multiple companies).
+  .
+  Anonymous LDAP binding is also supported (for LDAP servers that allow it), by
+  simply keeping the LDAP user and password empty in the LDAP configuration.
+  This does not allow anonymous authentication for users, it is only for the master
+  LDAP account that is used to verify if a user exists before attempting to
+  authenticate it.
+  .
+  Securing the connection with STARTTLS is available for LDAP servers supporting
+  it, by enabling the TLS option in the LDAP configuration.
+  .
+  For further options configuring the LDAP settings, refer to the ldap.conf
+  manpage: manpage:`ldap.conf(5)`.
+  .
+  Security Considerations:
+  ------------------------
+  Users' LDAP passwords are never stored in the OpenERP database, the LDAP server
+  is queried whenever a user needs to be authenticated. No duplication of the
+  password occurs, and passwords are managed in one place only.
+  .
+  OpenERP does not manage password changes in the LDAP, so any change of password
+  should be conducted by other means in the LDAP directory directly (for LDAP users).
+  .
+  It is also possible to have local OpenERP users in the database along with
+  LDAP-authenticated users (the Administrator account is one obvious example).
+  .
+  Here is how it works:
+  ---------------------
+  * The system first attempts to authenticate users against the local OpenERP
+  database;
+  * if this authentication fails (for example because the user has no local
+  password), the system then attempts to authenticate against LDAP;
+  .
+  As LDAP users have blank passwords by default in the local OpenERP database
+  (which means no access), the first step always fails and the LDAP server is
+  queried to do the authentication.
+  .
+  Enabling STARTTLS ensures that the authentication query to the LDAP server is
+  encrypted.
+  .
+  User Template:
+  --------------
+  In the LDAP configuration on the Company form, it is possible to select a *User
+  Template*. If set, this user will be used as template to create the local users
+  whenever someone authenticates for the first time via LDAP authentication. This
+  allows pre-setting the default groups and menus of the first-time users.
+  .
+  **Warning:** if you set a password for the user template, this password will be
+  assigned as local password for each new LDAP user, effectively setting
+  a *master password* for these users (until manually changed). You
+  usually do not want this. One easy way to setup a template user is to
+  login once with a valid LDAP user, let OpenERP create a blank local
+  user with the same login (and a blank password), then rename this new
+  user to a username that does not exist in LDAP, and setup its groups
+  the way you want.
+  .
+  Interaction with base_crypt:
+  ----------------------------
+  The base_crypt module is not compatible with this module, and will disable LDAP
+  authentication if installed at the same time.
+
+Package: openerp7-addons-auth-oauth
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  openerp7-addons-web,
+  openerp7-addons-base-setup,
+  ${misc:Depends}
+Conflicts: openerp-addons-auth-oauth
+Recommends: openerp7-server
+Description: OpenERP-7 module: auth_oauth
+  Allow users to login through OAuth2 Provider.
+  =============================================
+
+Package: openerp7-addons-auth-oauth-signup
+Section: net
+Architecture: all
+Depends:  openerp7-addons-auth-oauth,
+  openerp7-addons-auth-signup,
+  ${misc:Depends}
+Conflicts: openerp-addons-auth-oauth-signup
+Recommends: openerp7-server
+Description: OpenERP-7 module: auth_oauth_signup
+  Allow users to sign up through OAuth2 Provider.
+  ===============================================
+
+Package: openerp7-addons-auth-openid
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  openerp7-addons-web,
+  ${misc:Depends}
+Conflicts: openerp-addons-auth-openid
+Recommends: openerp7-server
+Description: OpenERP-7 module: auth_openid
+  Allow users to login through OpenID.
+  ====================================
+
+Package: openerp7-addons-auth-signup
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base-setup,
+  openerp7-addons-email-template,
+  ${misc:Depends}
+Conflicts: openerp-addons-auth-signup
+Recommends: openerp7-server
+Description: OpenERP-7 module: auth_signup
+  Allow users to sign up and reset their password
+  ===============================================
+
+Package: openerp7-addons-base-action-rule
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  openerp7-addons-mail,
+  ${misc:Depends}
+Conflicts: openerp-addons-base-action-rule
+Recommends: openerp7-server
+Description: OpenERP-7 module: base_action_rule
+  This module allows to implement action rules for any object.
+  ============================================================
+  .
+  Use automated actions to automatically trigger actions for various screens.
+  .
+  **Example:** A lead created by a specific user may be automatically set to a specific
+  sales team, or an opportunity which still has status pending after 14 days might
+  trigger an automatic reminder email.
+
+Package: openerp7-addons-base-calendar
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  openerp7-addons-base-status,
+  openerp7-addons-mail,
+  openerp7-addons-base-action-rule,
+  ${misc:Depends}
+Conflicts: openerp-addons-base-calendar
+Recommends: openerp7-server
+Description: OpenERP-7 module: base_calendar
+  This is a full-featured calendar system.
+  ========================================
+  .
+  It supports:
+  ------------
+  - Calendar of events
+  - Recurring events
+  .
+  If you need to manage your meetings, you should install the CRM module.
+
+Package: openerp7-addons-base-gengo
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  ${misc:Depends}
+Conflicts: openerp-addons-base-gengo
+Recommends: openerp7-server
+Description: OpenERP-7 module: base_gengo
+  Automated Translations through Gengo API
+  ========================================
+  .
+  This module will install passive scheduler job for automated translations
+  using the Gengo API. To activate it, you must
+  1) Configure your Gengo authentication parameters under `Settings > Companies > Gengo Parameters`
+  2) Launch the wizard under `Settings > Application Terms > Gengo: Manual Request of Translation` and follow the wizard.
+  .
+  This wizard will activate the CRON job and the Scheduler and will start the automatic translation via Gengo Services for all the terms where you requested it.
+
+Package: openerp7-addons-base-iban
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  ${misc:Depends}
+Conflicts: openerp-addons-base-iban
+Recommends: openerp7-server
+Description: OpenERP-7 module: base_iban
+  This module installs the base for IBAN (International Bank Account Number) bank accounts and checks for it's validity.
+  ======================================================================================================================
+  .
+  The ability to extract the correctly represented local accounts from IBAN accounts
+  with a single statement.
+
+Package: openerp7-addons-base-import
+Section: net
+Architecture: all
+Depends:  openerp7-addons-web,
+  ${misc:Depends}
+Conflicts: openerp-addons-base-import
+Recommends: openerp7-server
+Description: OpenERP-7 module: base_import
+  New extensible file import for OpenERP
+  ======================================
+  .
+  Re-implement openerp's file import system:
+  .
+  * Server side, the previous system forces most of the logic into the
+  client which duplicates the effort (between clients), makes the
+  import system much harder to use without a client (direct RPC or
+  other forms of automation) and makes knowledge about the
+  import/export system much harder to gather as it is spread over
+  3+ different projects.
+  .
+  * In a more extensible manner, so users and partners can build their
+  own front-end to import from other file formats (e.g. OpenDocument
+  files) which may be simpler to handle in their work flow or from
+  their data production sources.
+  .
+  * In a module, so that administrators and users of OpenERP who do not
+  need or want an online import can avoid it being available to users.
+
+Package: openerp7-addons-base-report-designer
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  ${misc:Depends}
+Conflicts: openerp-addons-base-report-designer
+Recommends: openerp7-server
+Description: OpenERP-7 module: base_report_designer
+  This module is used along with OpenERP OpenOffice Plugin.
+  =========================================================
+  .
+  This module adds wizards to Import/Export .sxw report that you can modify in OpenOffice.
+  Once you have modified it you can upload the report using the same wizard.
+
+Package: openerp7-addons-base-setup
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  openerp7-addons-web-kanban,
+  ${misc:Depends}
+Conflicts: openerp-addons-base-setup
+Recommends: openerp7-server
+Description: OpenERP-7 module: base_setup
+  This module helps to configure the system at the installation of a new database.
+  ================================================================================
+  .
+  Shows you a list of applications features to install from.
+
+Package: openerp7-addons-base-status
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  ${misc:Depends}
+Conflicts: openerp-addons-base-status
+Recommends: openerp7-server
+Description: OpenERP-7 module: base_status
+  This module handles state and stage. It is derived from the crm_base and crm_case classes from crm.
+  ===================================================================================================
+  .
+  * ``base_state``: state management
+  * ``base_stage``: stage management
+
+Package: openerp7-addons-base-vat
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  ${misc:Depends}
+Conflicts: openerp-addons-base-vat
+Recommends: openerp7-server
+Description: OpenERP-7 module: base_vat
+  VAT validation for Partner's VAT numbers.
+  =========================================
+  .
+  After installing this module, values entered in the VAT field of Partners will
+  be validated for all supported countries. The country is inferred from the
+  2-letter country code that prefixes the VAT number, e.g. ``BE0477472701``
+  will be validated using the Belgian rules.
+  .
+  There are two different levels of VAT number validation:
+  --------------------------------------------------------
+  * By default, a simple off-line check is performed using the known validation
+  rules for the country, usually a simple check digit. This is quick and
+  always available, but allows numbers that are perhaps not truly allocated,
+  or not valid anymore.
+  .
+  * When the "VAT VIES Check" option is enabled (in the configuration of the user's
+  Company), VAT numbers will be instead submitted to the online EU VIES
+  database, which will truly verify that the number is valid and currently
+  allocated to a EU company. This is a little bit slower than the simple
+  off-line check, requires an Internet connection, and may not be available
+  all the time. If the service is not available or does not support the
+  requested country (e.g. for non-EU countries), a simple check will be performed
+  instead.
+  .
+  Supported countries currently include EU countries, and a few non-EU countries
+  such as Chile, Colombia, Mexico, Norway or Russia. For unsupported countries,
+  only the country code will be validated.
+
+Package: openerp7-addons-board
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  ${misc:Depends}
+Conflicts: openerp-addons-board
+Recommends: openerp7-server
+Description: OpenERP-7 module: board
+  Lets the user create a custom dashboard.
+  ========================================
+  .
+  Allows users to create custom dashboard.
+
+Package: openerp7-addons-claim-from-delivery
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  openerp7-addons-crm-claim,
+  openerp7-addons-stock,
+  ${misc:Depends}
+Conflicts: openerp-addons-claim-from-delivery
+Recommends: openerp7-server
+Description: OpenERP-7 module: claim_from_delivery
+  Create a claim from a delivery order.
+  =====================================
+  .
+  Adds a Claim link to the delivery order.
+
+Package: openerp7-addons-contacts
+Section: net
+Architecture: all
+Depends:  openerp7-addons-mail,
+  ${misc:Depends}
+Conflicts: openerp-addons-contacts
+Recommends: openerp7-server
+Description: OpenERP-7 module: contacts
+  This module gives you a quick view of your address book, accessible from your home page.
+  You can track your suppliers, customers and other contacts.
+
+Package: openerp7-addons-crm
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base-action-rule,
+  openerp7-addons-base-setup,
+  openerp7-addons-base-status,
+  openerp7-addons-process,
+  openerp7-addons-mail,
+  openerp7-addons-email-template,
+  openerp7-addons-base-calendar,
+  openerp7-addons-resource,
+  openerp7-addons-board,
+  openerp7-addons-fetchmail,
+  ${misc:Depends}
+Conflicts: openerp-addons-crm
+Recommends: openerp7-server
+Description: OpenERP-7 module: crm
+  The generic OpenERP Customer Relationship Management
+  ====================================================
+  .
+  This application enables a group of people to intelligently and efficiently manage leads, opportunities, meetings and phone calls.
+  .
+  It manages key tasks such as communication, identification, prioritization, assignment, resolution and notification.
+  .
+  OpenERP ensures that all cases are successfully tracked by users, customers and suppliers. It can automatically send reminders, escalate the request, trigger specific methods and many other actions based on your own enterprise rules.
+  .
+  The greatest thing about this system is that users don't need to do anything special. The CRM module has an email gateway for the synchronization interface between mails and OpenERP. That way, users can just send emails to the request tracker.
+  .
+  OpenERP will take care of thanking them for their message, automatically routing it to the appropriate staff and make sure all future correspondence gets to the right place.
+  .
+  .
+  Dashboard for CRM will include:
+  -------------------------------
+  * Planned Revenue by Stage and User (graph)
+  * Opportunities by Stage (graph)
+
+Package: openerp7-addons-crm-claim
+Section: net
+Architecture: all
+Depends:  openerp7-addons-crm,
+  ${misc:Depends}
+Conflicts: openerp-addons-crm-claim
+Recommends: openerp7-server
+Description: OpenERP-7 module: crm_claim
+  Manage Customer Claims.
+  =======================
+  This application allows you to track your customers/suppliers claims and grievances.
+  .
+  It is fully integrated with the email gateway so that you can create
+  automatically new claims based on incoming emails.
+
+Package: openerp7-addons-crm-helpdesk
+Section: net
+Architecture: all
+Depends:  openerp7-addons-crm,
+  ${misc:Depends}
+Conflicts: openerp-addons-crm-helpdesk
+Recommends: openerp7-server
+Description: OpenERP-7 module: crm_helpdesk
+  Helpdesk Management.
+  ====================
+  .
+  Like records and processing of claims, Helpdesk and Support are good tools
+  to trace your interventions. This menu is more adapted to oral communication,
+  which is not necessarily related to a claim. Select a customer, add notes
+  and categorize your interventions with a channel and a priority level.
+
+Package: openerp7-addons-crm-partner-assign
+Section: net
+Architecture: all
+Depends:  openerp7-addons-crm,
+  openerp7-addons-account,
+  ${misc:Depends}
+Conflicts: openerp-addons-crm-partner-assign
+Recommends: openerp7-server
+Description: OpenERP-7 module: crm_partner_assign
+  This is the module used by OpenERP SA to redirect customers to its partners, based on geolocalization.
+  ======================================================================================================
+  .
+  You can geolocalize your opportunities by using this module.
+  .
+  Use geolocalization when assigning opportunities to partners.
+  Determine the GPS coordinates according to the address of the partner.
+  .
+  The most appropriate partner can be assigned.
+  You can also use the geolocalization without using the GPS coordinates.
+
+Package: openerp7-addons-crm-profiling
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  openerp7-addons-crm,
+  ${misc:Depends}
+Conflicts: openerp-addons-crm-profiling
+Recommends: openerp7-server
+Description: OpenERP-7 module: crm_profiling
+  This module allows users to perform segmentation within partners.
+  =================================================================
+  .
+  It uses the profiles criteria from the earlier segmentation module and improve it.
+  Thanks to the new concept of questionnaire. You can now regroup questions into a
+  questionnaire and directly use it on a partner.
+  .
+  It also has been merged with the earlier CRM & SRM segmentation tool because they
+  were overlapping.
+  .
+  **Note:** this module is not compatible with the module segmentation, since it's the same which has been renamed.
+
+Package: openerp7-addons-crm-todo
+Section: net
+Architecture: all
+Depends:  openerp7-addons-crm,
+  openerp7-addons-project-gtd,
+  ${misc:Depends}
+Conflicts: openerp-addons-crm-todo
+Recommends: openerp7-server
+Description: OpenERP-7 module: crm_todo
+  Todo list for CRM leads and opportunities.
+  ==========================================
+
+Package: openerp7-addons-decimal-precision
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  ${misc:Depends}
+Conflicts: openerp-addons-decimal-precision
+Recommends: openerp7-server
+Description: OpenERP-7 module: decimal_precision
+  Configure the price accuracy you need for different kinds of usage: accounting, sales, purchases.
+  =================================================================================================
+  .
+  The decimal precision is configured per company.
+
+Package: openerp7-addons-delivery
+Section: net
+Architecture: all
+Depends:  openerp7-addons-sale,
+  openerp7-addons-purchase,
+  openerp7-addons-stock,
+  ${misc:Depends}
+Conflicts: openerp-addons-delivery
+Recommends: openerp7-server
+Description: OpenERP-7 module: delivery
+  Allows you to add delivery methods in sale orders and picking.
+  ==============================================================
+  .
+  You can define your own carrier and delivery grids for prices. When creating
+  invoices from picking, OpenERP is able to add and compute the shipping line.
+
+Package: openerp7-addons-document
+Section: net
+Architecture: all
+Depends:  openerp7-addons-knowledge,
+  ${misc:Depends}
+Conflicts: openerp-addons-document
+Recommends: openerp7-server
+Description: OpenERP-7 module: document
+  This is a complete document management system.
+  ==============================================
+  * User Authentication
+  * Document Indexation:- .pptx and .docx files are not supported in Windows platform.
+  * Dashboard for Document that includes:
+  * New Files (list)
+  * Files by Resource Type (graph)
+  * Files by Partner (graph)
+  * Files Size by Month (graph)
+
+Package: openerp7-addons-document-ftp
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  openerp7-addons-document,
+  ${misc:Depends}
+Conflicts: openerp-addons-document-ftp
+Recommends: openerp7-server
+Description: OpenERP-7 module: document_ftp
+  This is a support FTP Interface with document management system.
+  ================================================================
+  .
+  With this module you would not only be able to access documents through OpenERP
+  but you would also be able to connect with them through the file system using the
+  FTP client.
+
+Package: openerp7-addons-document-page
+Section: net
+Architecture: all
+Depends:  openerp7-addons-knowledge,
+  ${misc:Depends}
+Conflicts: openerp-addons-document-page
+Recommends: openerp7-server
+Description: OpenERP-7 module: document_page
+  Pages
+  =====
+  Web pages
+
+Package: openerp7-addons-document-webdav
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  openerp7-addons-document,
+  ${misc:Depends}
+Conflicts: openerp-addons-document-webdav
+Recommends: openerp7-server
+Description: OpenERP-7 module: document_webdav
+  With this module, the WebDAV server for documents is activated.
+  ===============================================================
+  .
+  You can then use any compatible browser to remotely see the attachments of OpenObject.
+  .
+  After installation, the WebDAV server can be controlled by a [webdav] section in
+  the server's config.
+  .
+  Server Configuration Parameter:
+  -------------------------------
+  [webdav]:
+  +++++++++
+  * enable = True ; Serve webdav over the http(s) servers
+  * vdir = webdav ; the directory that webdav will be served at
+  * this default val means that webdav will be
+  * on "http://localhost:8069/webdav/
+  * verbose = True ; Turn on the verbose messages of webdav
+  * debug = True ; Turn on the debugging messages of webdav
+  * since the messages are routed to the python logging, with
+  * levels "debug" and "debug_rpc" respectively, you can leave
+  * these options on
+  .
+  Also implements IETF RFC 5785 for services discovery on a http server,
+  which needs explicit configuration in openerp-server.conf too.
+
+Package: openerp7-addons-edi
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  openerp7-addons-email-template,
+  ${misc:Depends}
+Conflicts: openerp-addons-edi
+Recommends: openerp7-server
+Description: OpenERP-7 module: edi
+  Provides a common EDI platform that other Applications can use.
+  ===============================================================
+  .
+  OpenERP specifies a generic EDI format for exchanging business documents between
+  different systems, and provides generic mechanisms to import and export them.
+  .
+  More details about OpenERP's EDI format may be found in the technical OpenERP
+  documentation at http://doc.openerp.com.
+
+Package: openerp7-addons-email-template
+Section: net
+Architecture: all
+Depends:  openerp7-addons-mail,
+  ${misc:Depends}
+Conflicts: openerp-addons-email-template
+Recommends: openerp7-server
+Description: OpenERP-7 module: email_template
+  Email Templating (simplified version of the original Power Email by Openlabs).
+  ==============================================================================
+  .
+  Lets you design complete email templates related to any OpenERP document (Sale
+  Orders, Invoices and so on), including sender, recipient, subject, body (HTML and
+  Text). You may also automatically attach files to your templates, or print and
+  attach a report.
+  .
+  For advanced use, the templates may include dynamic attributes of the document
+  they are related to. For example, you may use the name of a Partner's country
+  when writing to them, also providing a safe default in case the attribute is
+  not defined. Each template contains a built-in assistant to help with the
+  inclusion of these dynamic values.
+  .
+  If you enable the option, a composition assistant will also appear in the sidebar
+  of the OpenERP documents to which the template applies (e.g. Invoices).
+  This serves as a quick way to send a new email based on the template, after
+  reviewing and adapting the contents, if needed.
+  This composition assistant will also turn into a mass mailing system when called
+  for multiple documents at once.
+  .
+  These email templates are also at the heart of the marketing campaign system
+  (see the ``marketing_campaign`` application), if you need to automate larger
+  campaigns on any OpenERP document.
+  .
+  **Technical note:** only the templating system of the original Power Email by Openlabs was kept.
+
+Package: openerp7-addons-event
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base-setup,
+  openerp7-addons-board,
+  openerp7-addons-email-template,
+  ${misc:Depends}
+Conflicts: openerp-addons-event
+Recommends: openerp7-server
+Description: OpenERP-7 module: event
+  Organization and management of Events.
+  ======================================
+  .
+  The event module allows you to efficiently organise events and all related tasks: planification, registration tracking,
+  attendances, etc.
+  .
+  Key Features
+  ------------
+  * Manage your Events and Registrations
+  * Use emails to automatically confirm and send acknowledgements for any event registration
+
+Package: openerp7-addons-event-moodle
+Section: net
+Architecture: all
+Depends:  openerp7-addons-event,
+  ${misc:Depends}
+Conflicts: openerp-addons-event-moodle
+Recommends: openerp7-server
+Description: OpenERP-7 module: event_moodle
+  Configure your moodle server.
+  =============================
+  .
+  With this module you are able to connect your OpenERP with a moodle platform.
+  This module will create courses and students automatically in your moodle platform
+  to avoid wasting time.
+  Now you have a simple way to create training or courses with OpenERP and moodle.
+  .
+  STEPS TO CONFIGURE:
+  -------------------
+  .
+  1. Activate web service in moodle.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  >site administration >plugins >web services >manage protocols activate the xmlrpc web service
+  .
+  .
+  >site administration >plugins >web services >manage tokens create a token
+  .
+  .
+  >site administration >plugins >web services >overview activate webservice
+  .
+  .
+  2. Create confirmation email with login and password.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  We strongly suggest you to add those following lines at the bottom of your event
+  confirmation email to communicate the login/password of moodle to your subscribers.
+  .
+  .
+  ........your configuration text.......
+  .
+  **URL:** your moodle link for exemple: http://openerp.moodle.com
+  .
+  **LOGIN:** ${object.moodle_username}
+  .
+  **PASSWORD:** ${object.moodle_user_password}
+
+Package: openerp7-addons-event-sale
+Section: net
+Architecture: all
+Depends:  openerp7-addons-event,
+  openerp7-addons-sale-crm,
+  ${misc:Depends}
+Conflicts: openerp-addons-event-sale
+Recommends: openerp7-server
+Description: OpenERP-7 module: event_sale
+  Creating registration with sale orders.
+  =======================================
+  .
+  This module allows you to automate and connect your registration creation with
+  your main sale flow and therefore, to enable the invoicing feature of registrations.
+  .
+  It defines a new kind of service products that offers you the possibility to
+  choose an event category associated with it. When you encode a sale order for
+  that product, you will be able to choose an existing event of that category and
+  when you confirm your sale order it will automatically create a registration for
+  this event.
+
+Package: openerp7-addons-fetchmail
+Section: net
+Architecture: all
+Depends:  openerp7-addons-mail,
+  ${misc:Depends}
+Conflicts: openerp-addons-fetchmail
+Recommends: openerp7-server
+Description: OpenERP-7 module: fetchmail
+  Retrieve incoming email on POP/IMAP servers.
+  ============================================
+  .
+  Enter the parameters of your POP/IMAP account(s), and any incoming emails on
+  these accounts will be automatically downloaded into your OpenERP system. All
+  POP3/IMAP-compatible servers are supported, included those that require an
+  encrypted SSL/TLS connection.
+  .
+  This can be used to easily create email-based workflows for many email-enabled OpenERP documents, such as:
+  ----------------------------------------------------------------------------------------------------------
+  * CRM Leads/Opportunities
+  * CRM Claims
+  * Project Issues
+  * Project Tasks
+  * Human Resource Recruitments (Applicants)
+  .
+  Just install the relevant application, and you can assign any of these document
+  types (Leads, Project Issues) to your incoming email accounts. New emails will
+  automatically spawn new documents of the chosen type, so it's a snap to create a
+  mailbox-to-OpenERP integration. Even better: these documents directly act as mini
+  conversations synchronized by email. You can reply from within OpenERP, and the
+  answers will automatically be collected when they come back, and attached to the
+  same *conversation* document.
+  .
+  For more specific needs, you may also assign custom-defined actions
+  (technically: Server Actions) to be triggered for each incoming mail.
+
+Package: openerp7-addons-fleet
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  openerp7-addons-mail,
+  openerp7-addons-board,
+  ${misc:Depends}
+Conflicts: openerp-addons-fleet
+Recommends: openerp7-server
+Description: OpenERP-7 module: fleet
+  Vehicle, leasing, insurances, cost
+  ==================================
+  With this module, OpenERP helps you managing all your vehicles, the
+  contracts associated to those vehicle as well as services, fuel log
+  entries, costs and many other features necessary to the management
+  of your fleet of vehicle(s)
+  .
+  Main Features
+  -------------
+  * Add vehicles to your fleet
+  * Manage contracts for vehicles
+  * Reminder when a contract reach its expiration date
+  * Add services, fuel log entry, odometer values for all vehicles
+  * Show all costs associated to a vehicle or to a type of service
+  * Analysis graph for costs
+
+Package: openerp7-addons-google-base-account
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  ${misc:Depends}
+Conflicts: openerp-addons-google-base-account
+Recommends: openerp7-server
+Description: OpenERP-7 module: google_base_account
+  The module adds google user in res user.
+  ========================================
+
+Package: openerp7-addons-google-docs
+Section: net
+Architecture: all
+Depends:  openerp7-addons-google-base-account,
+  openerp7-addons-document,
+  ${misc:Depends}
+Conflicts: openerp-addons-google-docs
+Recommends: openerp7-server
+Description: OpenERP-7 module: google_docs
+  Module to attach a google document to any model.
+  ================================================
+
+Package: openerp7-addons-hr
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base-setup,
+  openerp7-addons-mail,
+  openerp7-addons-resource,
+  openerp7-addons-board,
+  ${misc:Depends}
+Conflicts: openerp-addons-hr
+Recommends: openerp7-server
+Description: OpenERP-7 module: hr
+  Human Resources Management
+  ==========================
+  .
+  This application enables you to manage important aspects of your company's staff and other details such as their skills, contacts, working time...
+  .
+  .
+  You can manage:
+  ---------------
+  * Employees and hierarchies : You can define your employee with User and display hierarchies
+  * HR Departments
+  * HR Jobs
+
+Package: openerp7-addons-hr-attendance
+Section: net
+Architecture: all
+Depends:  openerp7-addons-hr,
+  ${misc:Depends}
+Conflicts: openerp-addons-hr-attendance
+Recommends: openerp7-server
+Description: OpenERP-7 module: hr_attendance
+  This module aims to manage employee's attendances.
+  ==================================================
+  .
+  Keeps account of the attendances of the employees on the basis of the
+  actions(Sign in/Sign out) performed by them.
+
+Package: openerp7-addons-hr-contract
+Section: net
+Architecture: all
+Depends:  openerp7-addons-hr,
+  ${misc:Depends}
+Conflicts: openerp-addons-hr-contract
+Recommends: openerp7-server
+Description: OpenERP-7 module: hr_contract
+  Add all information on the employee form to manage contracts.
+  =============================================================
+  .
+  * Contract
+  * Place of Birth,
+  * Medical Examination Date
+  * Company Vehicle
+  .
+  You can assign several contracts per employee.
+
+Package: openerp7-addons-hr-evaluation
+Section: net
+Architecture: all
+Depends:  openerp7-addons-hr,
+  openerp7-addons-base-calendar,
+  openerp7-addons-survey,
+  ${misc:Depends}
+Conflicts: openerp-addons-hr-evaluation
+Recommends: openerp7-server
+Description: OpenERP-7 module: hr_evaluation
+  Periodical Employees evaluation and appraisals
+  ==============================================
+  .
+  By using this application you can maintain the motivational process by doing periodical evaluations of your employees' performance. The regular assessment of human resources can benefit your people as well your organization.
+  .
+  An evaluation plan can be assigned to each employee. These plans define the frequency and the way you manage your periodic personal evaluations. You will be able to define steps and attach interview forms to each step.
+  .
+  Manages several types of evaluations: bottom-up, top-down, self-evaluations and the final evaluation by the manager.
+  .
+  Key Features
+  ------------
+  * Ability to create employees evaluations.
+  * An evaluation can be created by an employee for subordinates, juniors as well as his manager.
+  * The evaluation is done according to a plan in which various surveys can be created. Each survey can be answered by a particular level in the employees hierarchy. The final review and evaluation is done by the manager.
+  * Every evaluation filled by employees can be viewed in a PDF form.
+  * Interview Requests are generated automatically by OpenERP according to employees evaluation plans. Each user receives automatic emails and requests to perform a periodical evaluation of their colleagues.
+
+Package: openerp7-addons-hr-expense
+Section: net
+Architecture: all
+Depends:  openerp7-addons-hr,
+  openerp7-addons-account-voucher,
+  openerp7-addons-account-accountant,
+  ${misc:Depends}
+Conflicts: openerp-addons-hr-expense
+Recommends: openerp7-server
+Description: OpenERP-7 module: hr_expense
+  Manage expenses by Employees
+  ============================
+  .
+  This application allows you to manage your employees' daily expenses. It gives you access to your employees’ fee notes and give you the right to complete and validate or refuse the notes. After validation it creates an invoice for the employee.
+  Employee can encode their own expenses and the validation flow puts it automatically in the accounting after validation by managers.
+  .
+  .
+  The whole flow is implemented as:
+  ---------------------------------
+  * Draft expense
+  * Confirmation of the sheet by the employee
+  * Validation by his manager
+  * Validation by the accountant and receipt creation
+  .
+  This module also uses analytic accounting and is compatible with the invoice on timesheet module so that you are able to automatically re-invoice your customers' expenses if your work by project.
+
+Package: openerp7-addons-hr-holidays
+Section: net
+Architecture: all
+Depends:  openerp7-addons-hr,
+  openerp7-addons-base-calendar,
+  openerp7-addons-process,
+  openerp7-addons-resource,
+  ${misc:Depends}
+Conflicts: openerp-addons-hr-holidays
+Recommends: openerp7-server
+Description: OpenERP-7 module: hr_holidays
+  Manage leaves and allocation requests
+  =====================================
+  .
+  This application controls the holiday schedule of your company. It allows employees to request holidays. Then, managers can review requests for holidays and approve or reject them. This way you can control the overall holiday planning for the company or department.
+  .
+  You can configure several kinds of leaves (sickness, holidays, paid days, ...) and allocate leaves to an employee or department quickly using allocation requests. An employee can also make a request for more days off by making a new Allocation. It will increase the total of available days for that leave type (if the request is accepted).
+  .
+  You can keep track of leaves in different ways by following reports:
+  .
+  * Leaves Summary
+  * Leaves by Department
+  * Leaves Analysis
+  .
+  A synchronization with an internal agenda (Meetings of the CRM module) is also possible in order to automatically create a meeting when a holiday request is accepted by setting up a type of meeting in Leave Type.
+
+Package: openerp7-addons-hr-payroll
+Section: net
+Architecture: all
+Depends:  openerp7-addons-hr,
+  openerp7-addons-hr-contract,
+  openerp7-addons-hr-holidays,
+  openerp7-addons-decimal-precision,
+  ${misc:Depends}
+Conflicts: openerp-addons-hr-payroll
+Recommends: openerp7-server
+Description: OpenERP-7 module: hr_payroll
+  Generic Payroll system.
+  =======================
+  .
+  * Employee Details
+  * Employee Contracts
+  * Passport based Contract
+  * Allowances/Deductions
+  * Allow to configure Basic/Gross/Net Salary
+  * Employee Payslip
+  * Monthly Payroll Register
+  * Integrated with Holiday Management
+
+Package: openerp7-addons-hr-payroll-account
+Section: net
+Architecture: all
+Depends:  openerp7-addons-hr-payroll,
+  openerp7-addons-account,
+  openerp7-addons-hr-expense,
+  ${misc:Depends}
+Conflicts: openerp-addons-hr-payroll-account
+Recommends: openerp7-server
+Description: OpenERP-7 module: hr_payroll_account
+  Generic Payroll system Integrated with Accounting.
+  ==================================================
+  .
+  * Expense Encoding
+  * Payment Encoding
+  * Company Contribution Management
+
+Package: openerp7-addons-hr-recruitment
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base-status,
+  openerp7-addons-decimal-precision,
+  openerp7-addons-hr,
+  openerp7-addons-survey,
+  openerp7-addons-base-calendar,
+  openerp7-addons-fetchmail,
+  ${misc:Depends}
+Conflicts: openerp-addons-hr-recruitment
+Recommends: openerp7-server
+Description: OpenERP-7 module: hr_recruitment
+  Manage job positions and the recruitment process
+  ================================================
+  .
+  This application allows you to easily keep track of jobs, vacancies, applications, interviews...
+  .
+  It is integrated with the mail gateway to automatically fetch email sent to <jobs@yourcompany.com> in the list of applications. It's also integrated with the document management system to store and search in the CV base and find the candidate that you are looking for. Similarly, it is integrated with the survey module to allow you to define interviews for different jobs.
+  You can define the different phases of interviews and easily rate the applicant from the kanban view.
+
+Package: openerp7-addons-hr-timesheet
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  openerp7-addons-hr,
+  openerp7-addons-base,
+  openerp7-addons-hr-attendance,
+  openerp7-addons-process,
+  ${misc:Depends}
+Conflicts: openerp-addons-hr-timesheet
+Recommends: openerp7-server
+Description: OpenERP-7 module: hr_timesheet
+  This module implements a timesheet system.
+  ==========================================
+  .
+  Each employee can encode and track their time spent on the different projects.
+  A project is an analytic account and the time spent on a project generates costs on
+  the analytic account.
+  .
+  Lots of reporting on time and employee tracking are provided.
+  .
+  It is completely integrated with the cost accounting module. It allows you to set
+  up a management by affair.
+
+Package: openerp7-addons-hr-timesheet-invoice
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  openerp7-addons-hr-timesheet,
+  ${misc:Depends}
+Conflicts: openerp-addons-hr-timesheet-invoice
+Recommends: openerp7-server
+Description: OpenERP-7 module: hr_timesheet_invoice
+  Generate your Invoices from Expenses, Timesheet Entries.
+  ========================================================
+  .
+  Module to generate invoices based on costs (human resources, expenses, ...).
+  .
+  You can define price lists in analytic account, make some theoretical revenue
+  reports.
+
+Package: openerp7-addons-hr-timesheet-sheet
+Section: net
+Architecture: all
+Depends:  openerp7-addons-hr-timesheet,
+  openerp7-addons-hr-timesheet-invoice,
+  openerp7-addons-process,
+  ${misc:Depends}
+Conflicts: openerp-addons-hr-timesheet-sheet
+Recommends: openerp7-server
+Description: OpenERP-7 module: hr_timesheet_sheet
+  Record and validate timesheets and attendances easily
+  =====================================================
+  .
+  This application supplies a new screen enabling you to manage both attendances (Sign in/Sign out) and your work encoding (timesheet) by period. Timesheet entries are made by employees each day. At the end of the defined period, employees validate their sheet and the manager must then approve his team's entries. Periods are defined in the company forms and you can set them to run monthly or weekly.
+  .
+  The complete timesheet validation process is:
+  ---------------------------------------------
+  * Draft sheet
+  * Confirmation at the end of the period by the employee
+  * Validation by the project manager
+  .
+  The validation can be configured in the company:
+  ------------------------------------------------
+  * Period size (Day, Week, Month)
+  * Maximal difference between timesheet and attendances
+
+Package: openerp7-addons-idea
+Section: net
+Architecture: all
+Depends:  openerp7-addons-mail,
+  ${misc:Depends}
+Conflicts: openerp-addons-idea
+Recommends: openerp7-server
+Description: OpenERP-7 module: idea
+  This module allows user to easily and efficiently participate in enterprise innovation.
+  =======================================================================================
+  .
+  It allows everybody to express ideas about different subjects.
+  Then, other users can comment on these ideas and vote for particular ideas.
+  Each idea has a score based on the different votes.
+  The managers can obtain an easy view of best ideas from all the users.
+  Once installed, check the menu 'Ideas' in the 'Tools' main menu.
+
+Package: openerp7-addons-knowledge
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  openerp7-addons-base-setup,
+  ${misc:Depends}
+Conflicts: openerp-addons-knowledge
+Recommends: openerp7-server
+Description: OpenERP-7 module: knowledge
+  Installer for knowledge-based Hidden.
+  =====================================
+  .
+  Makes the Knowledge Application Configuration available from where you can install
+  document and Wiki based Hidden.
+
+Package: openerp7-addons-l10n-ar
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account-chart,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-ar
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_ar
+  Argentinian accounting chart and tax localization.
+  ==================================================
+  .
+  Plan contable argentino e impuestos de acuerdo a disposiciones vigentes
+
+Package: openerp7-addons-l10n-at
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account-chart,
+  openerp7-addons-base-vat,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-at
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_at
+  This module provides the standard Accounting Chart for Austria which is based on the Template from BMF.gv.at.
+  =============================================================================================================
+  Please keep in mind that you should review and adapt it with your Accountant, before using it in a live Environment.
+
+Package: openerp7-addons-l10n-be
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  openerp7-addons-base-vat,
+  openerp7-addons-base-iban,
+  openerp7-addons-account-chart,
+  openerp7-addons-l10n-be-coda,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-be
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_be
+  This is the base module to manage the accounting chart for Belgium in OpenERP.
+  ==============================================================================
+  .
+  After installing this module, the Configuration wizard for accounting is launched.
+  * We have the account templates which can be helpful to generate Charts of Accounts.
+  * On that particular wizard, you will be asked to pass the name of the company,
+  the chart template to follow, the no. of digits to generate, the code for your
+  account and bank account, currency to create journals.
+  .
+  Thus, the pure copy of Chart Template is generated.
+  .
+  Wizards provided by this module:
+  --------------------------------
+  * Partner VAT Intra: Enlist the partners with their related VAT and invoiced
+  amounts. Prepares an XML file format.
+  .
+  **Path to access :** Invoicing/Reporting/Legal Reports/Belgium Statements/Partner VAT Intra
+  * Periodical VAT Declaration: Prepares an XML file for Vat Declaration of
+  the Main company of the User currently Logged in.
+  .
+  **Path to access :** Invoicing/Reporting/Legal Reports/Belgium Statements/Periodical VAT Declaration
+  * Annual Listing Of VAT-Subjected Customers: Prepares an XML file for Vat
+  Declaration of the Main company of the User currently Logged in Based on
+  Fiscal year.
+  .
+  **Path to access :** Invoicing/Reporting/Legal Reports/Belgium Statements/Annual Listing Of VAT-Subjected Customers
+
+Package: openerp7-addons-l10n-be-coda
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account-voucher,
+  openerp7-addons-base-iban,
+  openerp7-addons-l10n-be-invoice-bba,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-be-coda
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_be_coda
+  Module to import CODA bank statements.
+  ======================================
+  .
+  Supported are CODA flat files in V2 format from Belgian bank accounts.
+  ----------------------------------------------------------------------
+  * CODA v1 support.
+  * CODA v2.2 support.
+  * Foreign Currency support.
+  * Support for all data record types (0, 1, 2, 3, 4, 8, 9).
+  * Parsing & logging of all Transaction Codes and Structured Format
+  Communications.
+  * Automatic Financial Journal assignment via CODA configuration parameters.
+  * Support for multiple Journals per Bank Account Number.
+  * Support for multiple statements from different bank accounts in a single
+  CODA file.
+  * Support for 'parsing only' CODA Bank Accounts (defined as type='info' in
+  the CODA Bank Account configuration records).
+  * Multi-language CODA parsing, parsing configuration data provided for EN,
+  NL, FR.
+  .
+  The machine readable CODA Files are parsed and stored in human readable format in
+  CODA Bank Statements. Also Bank Statements are generated containing a subset of
+  the CODA information (only those transaction lines that are required for the
+  creation of the Financial Accounting records). The CODA Bank Statement is a
+  'read-only' object, hence remaining a reliable representation of the original
+  CODA file whereas the Bank Statement will get modified as required by accounting
+  business processes.
+  .
+  CODA Bank Accounts configured as type 'Info' will only generate CODA Bank Statements.
+  .
+  A removal of one object in the CODA processing results in the removal of the
+  associated objects. The removal of a CODA File containing multiple Bank
+  Statements will also remove those associated statements.
+  .
+  The following reconciliation logic has been implemented in the CODA processing:
+  -------------------------------------------------------------------------------
+  1) The Company's Bank Account Number of the CODA statement is compared against
+  the Bank Account Number field of the Company's CODA Bank Account
+  configuration records (whereby bank accounts defined in type='info'
+  configuration records are ignored). If this is the case an 'internal transfer'
+  transaction is generated using the 'Internal Transfer Account' field of the
+  CODA File Import wizard.
+  2) As a second step the 'Structured Communication' field of the CODA transaction
+  line is matched against the reference field of in- and outgoing invoices
+  (supported : Belgian Structured Communication Type).
+  3) When the previous step doesn't find a match, the transaction counterparty is
+  located via the Bank Account Number configured on the OpenERP Customer and
+  Supplier records.
+  4) In case the previous steps are not successful, the transaction is generated
+  by using the 'Default Account for Unrecognized Movement' field of the CODA
+  File Import wizard in order to allow further manual processing.
+  .
+  In stead of a manual adjustment of the generated Bank Statements, you can also
+  re-import the CODA after updating the OpenERP database with the information that
+  was missing to allow automatic reconciliation.
+  .
+  Remark on CODA V1 support:
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~
+  In some cases a transaction code, transaction category or structured
+  communication code has been given a new or clearer description in CODA V2.The
+  description provided by the CODA configuration tables is based upon the CODA
+  V2.2 specifications.
+  If required, you can manually adjust the descriptions via the CODA configuration menu.
+
+Package: openerp7-addons-l10n-be-hr-payroll
+Section: net
+Architecture: all
+Depends:  openerp7-addons-hr-payroll,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-be-hr-payroll
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_be_hr_payroll
+  Belgian Payroll Rules.
+  ======================
+  .
+  * Employee Details
+  * Employee Contracts
+  * Passport based Contract
+  * Allowances/Deductions
+  * Allow to configure Basic/Gross/Net Salary
+  * Employee Payslip
+  * Monthly Payroll Register
+  * Integrated with Holiday Management
+  * Salary Maj, ONSS, Withholding Tax, Child Allowance, ...
+
+Package: openerp7-addons-l10n-be-hr-payroll-account
+Section: net
+Architecture: all
+Depends:  openerp7-addons-l10n-be-hr-payroll,
+  openerp7-addons-hr-payroll-account,
+  openerp7-addons-l10n-be,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-be-hr-payroll-account
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_be_hr_payroll_account
+  Accounting Data for Belgian Payroll Rules.
+  ==========================================
+
+Package: openerp7-addons-l10n-be-invoice-bba
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-be-invoice-bba
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_be_invoice_bba
+  Belgian localization for in- and outgoing invoices (prereq to account_coda):
+  ============================================================================
+  - Rename 'reference' field labels to 'Communication'
+  - Add support for Belgian Structured Communication
+  .
+  A Structured Communication can be generated automatically on outgoing invoices according to the following algorithms:
+  ---------------------------------------------------------------------------------------------------------------------
+  1) Random : +++RRR/RRRR/RRRDD+++
+  **R..R =** Random Digits, **DD =** Check Digits
+  2) Date : +++DOY/YEAR/SSSDD+++
+  **DOY =** Day of the Year, **SSS =** Sequence Number, **DD =** Check Digits
+  3) Customer Reference +++RRR/RRRR/SSSDDD+++
+  **R..R =** Customer Reference without non-numeric characters, **SSS =** Sequence Number, **DD =** Check Digits
+  .
+  The preferred type of Structured Communication and associated Algorithm can be
+  specified on the Partner records. A 'random' Structured Communication will
+  generated if no algorithm is specified on the Partner record.
+
+Package: openerp7-addons-l10n-bo
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account-chart,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-bo
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_bo
+  Bolivian accounting chart and tax localization.
+  .
+  Plan contable boliviano e impuestos de acuerdo a disposiciones vigentes
+
+Package: openerp7-addons-l10n-br
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  openerp7-addons-account-chart,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-br
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_br
+  Base module for the Brazilian localization
+  ==========================================
+  .
+  This module consists in:
+  .
+  - Generic Brazilian chart of accounts
+  - Brazilian taxes such as:
+  .
+  - IPI
+  - ICMS
+  - PIS
+  - COFINS
+  - ISS
+  - IR
+  - IRPJ
+  - CSLL
+  .
+  The field tax_discount has also been added in the account.tax.template and
+  account.tax objects to allow the proper computation of some Brazilian VATs
+  such as ICMS. The chart of account creation wizard has been extended to
+  propagate those new data properly.
+  .
+  It's important to note however that this module lack many implementations to
+  use OpenERP properly in Brazil. Those implementations (such as the electronic
+  fiscal Invoicing which is already operational) are brought by more than 15
+  additional modules of the Brazilian Launchpad localization project
+  https://launchpad.net/openerp.pt-br-localiz and their dependencies in the
+  extra addons branch. Those modules aim at not breaking with the remarkable
+  OpenERP modularity, this is why they are numerous but small. One of the
+  reasons for maintaining those modules apart is that Brazilian Localization
+  leaders need commit rights agility to complete the localization as companies
+  fund the remaining legal requirements (such as soon fiscal ledgers,
+  accounting SPED, fiscal SPED and PAF ECF that are still missing as September
+  2011). Those modules are also strictly licensed under AGPL V3 and today don't
+  come with any additional paid permission for online use of 'private modules'.
+
+Package: openerp7-addons-l10n-ca
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  openerp7-addons-account,
+  openerp7-addons-base-iban,
+  openerp7-addons-base-vat,
+  openerp7-addons-account-chart,
+  openerp7-addons-account-anglo-saxon,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-ca
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_ca
+  This is the module to manage the English and French - Canadian accounting chart in OpenERP.
+  ===========================================================================================
+  .
+  Canadian accounting charts and localizations.
+
+Package: openerp7-addons-l10n-ch
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  openerp7-addons-l10n-multilang,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-ch
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_ch
+  Swiss localization :
+  ====================
+  **Multilang swiss STERCHI account chart and taxes**
+  **Author:** Camptocamp SA
+  .
+  **Financial contributors:** Prisme Solutions Informatique SA, Quod SA
+  .
+  **Translation contributors:** brain-tec AG, Agile Business Group
+  .
+  **This release will introduce major changes to l10n_ch.**
+  .
+  Due to important refactoring needs and the Switzerland adoption of new international payment standard during 2013-2014. We have reorganised the swiss localization addons this way:
+  .
+  - **l10n_ch**: Multilang swiss STERCHI account chart and taxes (official addon)
+  - **l10n_ch_base_bank**: Technical module that introduces a new and simplified version of bank type management
+  - **l10n_ch_bank**: List of swiss banks
+  - **l10n_ch_zip**: List of swiss postal zip
+  - **l10n_ch_dta**: Support of dta payment protocol (will be deprecated end 2014)
+  - **l10n_ch_payment_slip**: Support of ESR/BVR payment slip report and reconciliation. Report refactored with easy element positioning.
+  - **l10n_ch_sepa**: Alpha implementation of PostFinance SEPA/PAIN support will be completed during 2013/2014
+  .
+  The modules will be soon available on OpenERP swiss localization on launchpad:
+  https://launchpad.net/openerp-swiss-localization
+
+Package: openerp7-addons-l10n-cl
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account-chart,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-cl
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_cl
+  Chilean accounting chart and tax localization.
+  ==============================================
+  Plan contable chileno e impuestos de acuerdo a disposiciones vigentes
+
+Package: openerp7-addons-l10n-cn
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  openerp7-addons-account,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-cn
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_cn
+  添加中文省份数据
+  科目类型\会计科目表模板\增值税\辅助核算类别\管理会计凭证簿\财务会计凭证簿
+  ============================================================
+
+Package: openerp7-addons-l10n-co
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  openerp7-addons-base-vat,
+  openerp7-addons-account-chart,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-co
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_co
+  Chart of account for Colombia
+  =============================
+  .
+  Source of this chart of account is here_.
+  .
+  All the documentation available in this website is embeded in this module, to
+  be sure when you open OpenERP it has all necesary information to manage
+  accounting en Colombia.
+  .
+  The law that enable this chart of account as valid for this country is
+  available in this other link_.
+  .
+  This module has the intention to put available out of the box the chart of
+  account for Colombia in Openerp.
+  .
+  We recommend install the module account_anglo_sxon to be able to have the cost
+  accounting correctly setted in out invoices.
+  .
+  After installing this module, the Configuration wizard for accounting is launched.
+  * We have the account templates which can be helpful to generate Charts of Accounts.
+  * On that particular wizard, you will be asked to pass the name of the company,
+  the chart template to follow, the no. of digits to generate, the code for your
+  account and bank account, currency to create journals.
+  .
+  .. _here: http://puc.com.co/
+  .. _link: http://puc.com.co/normatividad/
+
+Package: openerp7-addons-l10n-cr
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  openerp7-addons-account-chart,
+  openerp7-addons-base,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-cr
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_cr
+  Chart of accounts for Costa Rica.
+  =================================
+  .
+  Includes:
+  ---------
+  * account.type
+  * account.account.template
+  * account.tax.template
+  * account.tax.code.template
+  * account.chart.template
+  .
+  Everything is in English with Spanish translation. Further translations are welcome,
+  please go to http://translations.launchpad.net/openerp-costa-rica.
+
+Package: openerp7-addons-l10n-de
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  openerp7-addons-account,
+  openerp7-addons-base-iban,
+  openerp7-addons-base-vat,
+  openerp7-addons-account-chart,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-de
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_de
+  Dieses  Modul beinhaltet einen deutschen Kontenrahmen basierend auf dem SKR03.
+  ==============================================================================
+  .
+  German accounting chart and localization.
+
+Package: openerp7-addons-l10n-ec
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  openerp7-addons-base-vat,
+  openerp7-addons-base-iban,
+  openerp7-addons-account-chart,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-ec
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_ec
+  This is the base module to manage the accounting chart for Ecuador in OpenERP.
+  ==============================================================================
+  .
+  Accounting chart and localization for Ecuador.
+
+Package: openerp7-addons-l10n-es
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  openerp7-addons-base-vat,
+  openerp7-addons-base-iban,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-es
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_es
+  Spanish Charts of Accounts (PGCE 2008).
+  =======================================
+  .
+  * Defines the following chart of account templates:
+  * Spanish General Chart of Accounts 2008
+  * Spanish General Chart of Accounts 2008 for small and medium companies
+  * Spanish General Chart of Accounts 2008 for associations
+  * Defines templates for sale and purchase VAT
+  * Defines tax code templates
+
+Package: openerp7-addons-l10n-et
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base-vat,
+  openerp7-addons-account-chart,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-et
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_et
+  Base Module for Ethiopian Localization
+  ======================================
+  .
+  This is the latest Ethiopian OpenERP localization and consists of:
+  - Chart of Accounts
+  - VAT tax structure
+  - Withholding tax structure
+  - Regional State listings
+
+Package: openerp7-addons-l10n-fr
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base-iban,
+  openerp7-addons-account,
+  openerp7-addons-account-chart,
+  openerp7-addons-base-vat,
+  openerp7-addons-l10n-fr-rib,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-fr
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_fr
+  This is the module to manage the accounting chart for France in OpenERP.
+  ========================================================================
+  .
+  This module applies to companies based in France mainland. It doesn't apply to
+  companies based in the DOM-TOMs (Guadeloupe, Martinique, Guyane, Réunion, Mayotte).
+  .
+  This localisation module creates the VAT taxes of type 'tax included' for purchases
+  (it is notably required when you use the module 'hr_expense'). Beware that these
+  'tax included' VAT taxes are not managed by the fiscal positions provided by this
+  module (because it is complex to manage both 'tax excluded' and 'tax included'
+  scenarios in fiscal positions).
+  .
+  This localisation module doesn't properly handle the scenario when a France-mainland
+  company sells services to a company based in the DOMs. We could manage it in the
+  fiscal positions, but it would require to differentiate between 'product' VAT taxes
+  and 'service' VAT taxes. We consider that it is too 'heavy' to have this by default
+  in l10n_fr; companies that sell services to DOM-based companies should update the
+  configuration of their taxes and fiscal positions manually.
+  .
+  **Credits:** Sistheo, Zeekom, CrysaLEAD, Akretion and Camptocamp.
+
+Package: openerp7-addons-l10n-fr-hr-payroll
+Section: net
+Architecture: all
+Depends:  openerp7-addons-hr-payroll,
+  openerp7-addons-l10n-fr,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-fr-hr-payroll
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_fr_hr_payroll
+  French Payroll Rules.
+  =====================
+  .
+  - Configuration of hr_payroll for French localization
+  - All main contributions rules for French payslip, for 'cadre' and 'non-cadre'
+  - New payslip report
+  .
+  TODO:
+  -----
+  - Integration with holidays module for deduction and allowance
+  - Integration with hr_payroll_account for the automatic account_move_line
+  creation from the payslip
+  - Continue to integrate the contribution. Only the main contribution are
+  currently implemented
+  - Remake the report under webkit
+  - The payslip.line with appears_in_payslip = False should appears in the
+  payslip interface, but not in the payslip report
+
+Package: openerp7-addons-l10n-fr-rib
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  openerp7-addons-base-iban,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-fr-rib
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_fr_rib
+  This module lets users enter the banking details of Partners in the RIB format (French standard for bank accounts details).
+  ===========================================================================================================================
+  .
+  RIB Bank Accounts can be entered in the "Accounting" tab of the Partner form by specifying the account type "RIB".
+  .
+  The four standard RIB fields will then become mandatory:
+  --------------------------------------------------------
+  - Bank Code
+  - Office Code
+  - Account number
+  - RIB key
+  .
+  As a safety measure, OpenERP will check the RIB key whenever a RIB is saved, and
+  will refuse to record the data if the key is incorrect. Please bear in mind that
+  this can only happen when the user presses the 'save' button, for example on the
+  Partner Form. Since each bank account may relate to a Bank, users may enter the
+  RIB Bank Code in the Bank form - it will the pre-fill the Bank Code on the RIB
+  when they select the Bank. To make this easier, this module will also let users
+  find Banks using their RIB code.
+  .
+  The module base_iban can be a useful addition to this module, because French banks
+  are now progressively adopting the international IBAN format instead of the RIB format.
+  The RIB and IBAN codes for a single account can be entered by recording two Bank
+  Accounts in OpenERP: the first with the type 'RIB', the second with the type 'IBAN'.
+
+Package: openerp7-addons-l10n-gr
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  openerp7-addons-account,
+  openerp7-addons-base-iban,
+  openerp7-addons-base-vat,
+  openerp7-addons-account-chart,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-gr
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_gr
+  This is the base module to manage the accounting chart for Greece.
+  ==================================================================
+  .
+  Greek accounting chart and localization.
+
+Package: openerp7-addons-l10n-gt
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  openerp7-addons-account,
+  openerp7-addons-account-chart,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-gt
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_gt
+  This is the base module to manage the accounting chart for Guatemala.
+  =====================================================================
+  .
+  Agrega una nomenclatura contable para Guatemala. También icluye impuestos y
+  la moneda del Quetzal. -- Adds accounting chart for Guatemala. It also includes
+  taxes and the Quetzal currency.
+
+Package: openerp7-addons-l10n-hn
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  openerp7-addons-account,
+  openerp7-addons-account-chart,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-hn
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_hn
+  This is the base module to manage the accounting chart for Honduras.
+  ====================================================================
+  .
+  Agrega una nomenclatura contable para Honduras. También incluye impuestos y la
+  moneda Lempira. -- Adds accounting chart for Honduras. It also includes taxes
+  and the Lempira currency.
+
+Package: openerp7-addons-l10n-hr
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  openerp7-addons-account-chart,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-hr
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_hr
+  Croatian localisation.
+  ======================
+  .
+  Author: Goran Kliska, Slobodni programi d.o.o., Zagreb
+  http://www.slobodni-programi.hr
+  .
+  Contributions:
+  Tomislav Bošnjaković, Storm Computers: tipovi konta
+  Ivan Vađić, Slobodni programi: tipovi konta
+  .
+  Description:
+  .
+  Croatian Chart of Accounts (RRIF ver.2012)
+  .
+  RRIF-ov računski plan za poduzetnike za 2012.
+  Vrste konta
+  Kontni plan prema RRIF-u, dorađen u smislu kraćenja naziva i dodavanja analitika
+  Porezne grupe prema poreznoj prijavi
+  Porezi PDV obrasca
+  Ostali porezi
+  Osnovne fiskalne pozicije
+  .
+  Izvori podataka:
+  http://www.rrif.hr/dok/preuzimanje/rrif-rp2011.rar
+  http://www.rrif.hr/dok/preuzimanje/rrif-rp2012.rar
+
+Package: openerp7-addons-l10n-in
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  openerp7-addons-account-chart,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-in
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_in
+  Indian Accounting: Chart of Account.
+  ====================================
+  .
+  Indian accounting chart and localization.
+
+Package: openerp7-addons-l10n-in-hr-payroll
+Section: net
+Architecture: all
+Depends:  openerp7-addons-hr-payroll,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-in-hr-payroll
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_in_hr_payroll
+  Indian Payroll Salary Rules.
+  ============================
+  .
+  -Configuration of hr_payroll for India localization
+  -All main contributions rules for India payslip.
+  * New payslip report
+  * Employee Contracts
+  * Allow to configure Basic / Gross / Net Salary
+  * Employee PaySlip
+  * Allowance / Deduction
+  * Integrated with Holiday Management
+  * Medical Allowance, Travel Allowance, Child Allowance, ...
+  - Payroll Advice and Report
+  - Yearly Salary by Head and Yearly Salary by Employee Report
+
+Package: openerp7-addons-l10n-it
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base-vat,
+  openerp7-addons-account-chart,
+  openerp7-addons-base-iban,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-it
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_it
+  Piano dei conti italiano di un'impresa generica.
+  ================================================
+  .
+  Italian accounting chart and localization.
+
+Package: openerp7-addons-l10n-lu
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  openerp7-addons-base-vat,
+  openerp7-addons-base-iban,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-lu
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_lu
+  This is the base module to manage the accounting chart for Luxembourg.
+  ======================================================================
+  .
+  * the Luxembourg Official Chart of Accounts (law of June 2009 + 2011 chart and Taxes),
+  * the Tax Code Chart for Luxembourg
+  * the main taxes used in Luxembourg
+  * default fiscal position for local, intracom, extracom
+
+Package: openerp7-addons-l10n-ma
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  openerp7-addons-account,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-ma
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_ma
+  This is the base module to manage the accounting chart for Maroc.
+  =================================================================
+  .
+  Ce Module charge le modèle du plan de comptes standard Marocain et permet de
+  générer les états comptables aux normes marocaines (Bilan, CPC (comptes de
+  produits et charges), balance générale à 6 colonnes, Grand livre cumulatif...).
+  L'intégration comptable a été validé avec l'aide du Cabinet d'expertise comptable
+  Seddik au cours du troisième trimestre 2010.
+
+Package: openerp7-addons-l10n-multilang
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account-accountant,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-multilang
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_multilang
+  * Multi language support for Chart of Accounts, Taxes, Tax Codes, Journals,
+  Accounting Templates, Analytic Chart of Accounts and Analytic Journals.
+  * Setup wizard changes
+  - Copy translations for COA, Tax, Tax Code and Fiscal Position from
+  templates to target objects.
+
+Package: openerp7-addons-l10n-mx
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  openerp7-addons-base-vat,
+  openerp7-addons-account-chart,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-mx
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_mx
+  Minimal accounting configuration for Mexico.
+  ============================================
+  .
+  This Chart of account is a minimal proposal to be able to use OoB the
+  accounting feature of Openerp.
+  .
+  This doesn't pretend be all the localization for MX it is just the minimal
+  data required to start from 0 in mexican localization.
+  .
+  This modules and its content is updated frequently by openerp-mexico team.
+  .
+  With this module you will have:
+  .
+  - Minimal chart of account tested in production eviroments.
+  - Minimal chart of taxes, to comply with SAT_ requirements.
+  .
+  .. SAT: http://www.sat.gob.mx/
+
+Package: openerp7-addons-l10n-nl
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  openerp7-addons-base-vat,
+  openerp7-addons-base-iban,
+  openerp7-addons-account-chart,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-nl
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_nl
+  This is the module to manage the accounting chart for Netherlands in OpenERP.
+  =============================================================================
+  .
+  Read changelog in file __openerp__.py for version information.
+  Dit is een basismodule om een uitgebreid grootboek- en BTW schema voor
+  Nederlandse bedrijven te installeren in OpenERP versie 7.0.
+  .
+  De BTW rekeningen zijn waar nodig gekoppeld om de juiste rapportage te genereren,
+  denk b.v. aan intracommunautaire verwervingen waarbij u 21% BTW moet opvoeren,
+  maar tegelijkertijd ook 21% als voorheffing weer mag aftrekken.
+  .
+  Na installatie van deze module word de configuratie wizard voor 'Accounting' aangeroepen.
+  * U krijgt een lijst met grootboektemplates aangeboden waarin zich ook het
+  Nederlandse grootboekschema bevind.
+  .
+  * Als de configuratie wizard start, wordt u gevraagd om de naam van uw bedrijf
+  in te voeren, welke grootboekschema te installeren, uit hoeveel cijfers een
+  grootboekrekening mag bestaan, het rekeningnummer van uw bank en de currency
+  om Journalen te creeren.
+  .
+  Let op!! -> De template van het Nederlandse rekeningschema is opgebouwd uit 4
+  cijfers. Dit is het minimale aantal welk u moet invullen, u mag het aantal verhogen.
+  De extra cijfers worden dan achter het rekeningnummer aangevult met 'nullen'.
+
+Package: openerp7-addons-l10n-pa
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account-chart,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-pa
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_pa
+  Panamenian accounting chart and tax localization.
+  .
+  Plan contable panameño e impuestos de acuerdo a disposiciones vigentes
+  .
+  Con la Colaboración de
+  - AHMNET CORP http://www.ahmnet.com
+
+Package: openerp7-addons-l10n-pe
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account-chart,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-pe
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_pe
+  Peruvian accounting chart and tax localization. According the PCGE 2010.
+  ========================================================================
+  .
+  Plan contable peruano e impuestos de acuerdo a disposiciones vigentes de la
+  SUNAT 2011 (PCGE 2010).
+
+Package: openerp7-addons-l10n-pl
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  openerp7-addons-base-iban,
+  openerp7-addons-base-vat,
+  openerp7-addons-account-chart,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-pl
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_pl
+  This is the module to manage the accounting chart and taxes for Poland in OpenERP.
+  ==================================================================================
+  .
+  To jest moduł do tworzenia wzorcowego planu kont i podstawowych ustawień do podatków
+  VAT 0%, 7% i 22%. Moduł ustawia też konta do kupna i sprzedaży towarów zakładając,
+  że wszystkie towary są w obrocie hurtowym.
+
+Package: openerp7-addons-l10n-pt
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  openerp7-addons-base-vat,
+  openerp7-addons-account,
+  openerp7-addons-account-chart,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-pt
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_pt
+  Plano de contas SNC para Portugal
+
+Package: openerp7-addons-l10n-ro
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  openerp7-addons-account-chart,
+  openerp7-addons-base-vat,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-ro
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_ro
+  This is the module to manage the accounting chart, VAT structure and Registration Number for Romania in OpenERP.
+  ================================================================================================================
+  .
+  Romanian accounting chart and localization.
+
+Package: openerp7-addons-l10n-si
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  openerp7-addons-base-iban,
+  openerp7-addons-base-vat,
+  openerp7-addons-account-chart,
+  openerp7-addons-account-cancel,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-si
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_si
+  Kontni načrt za gospodarske družbe
+
+Package: openerp7-addons-l10n-syscohada
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  openerp7-addons-base-vat,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-syscohada
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_syscohada
+  This module implements the accounting chart for OHADA area.
+  ===========================================================
+  .
+  It allows any company or association to manage its financial accounting.
+  .
+  Countries that use OHADA are the following:
+  -------------------------------------------
+  Benin, Burkina Faso, Cameroon, Central African Republic, Comoros, Congo,
+  .
+  Ivory Coast, Gabon, Guinea, Guinea Bissau, Equatorial Guinea, Mali, Niger,
+  .
+  Replica of Democratic Congo, Senegal, Chad, Togo.
+
+Package: openerp7-addons-l10n-th
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account-chart,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-th
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_th
+  Chart of Accounts for Thailand.
+  ===============================
+  .
+  Thai accounting chart and localization.
+
+Package: openerp7-addons-l10n-tr
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  openerp7-addons-base-vat,
+  openerp7-addons-account-chart,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-tr
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_tr
+  Türkiye için Tek düzen hesap planı şablonu OpenERP Modülü.
+  ==========================================================
+  .
+  Bu modül kurulduktan sonra, Muhasebe yapılandırma sihirbazı çalışır
+  * Sihirbaz sizden hesap planı şablonu, planın kurulacağı şirket, banka hesap
+  bilgileriniz, ilgili para birimi gibi bilgiler isteyecek.
+
+Package: openerp7-addons-l10n-uk
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base-iban,
+  openerp7-addons-base-vat,
+  openerp7-addons-account-chart,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-uk
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_uk
+  This is the latest UK OpenERP localisation necessary to run OpenERP accounting for UK SME's with:
+  =================================================================================================
+  - a CT600-ready chart of accounts
+  - VAT100-ready tax structure
+  - InfoLogic UK counties listing
+  - a few other adaptations
+
+Package: openerp7-addons-l10n-us
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account-chart,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-us
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_us
+  United States - Chart of accounts.
+  ==================================
+
+Package: openerp7-addons-l10n-uy
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-uy
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_uy
+  General Chart of Accounts.
+  ==========================
+  .
+  Provide Templates for Chart of Accounts, Taxes for Uruguay.
+
+Package: openerp7-addons-l10n-ve
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  openerp7-addons-base-vat,
+  openerp7-addons-account-chart,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-ve
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_ve
+  Chart of Account for Venezuela.
+  ===============================
+  .
+  Venezuela doesn't have any chart of account by law, but the default
+  proposed in OpenERP should comply with some Accepted best practices in Venezuela,
+  this plan comply with this practices.
+  .
+  This module has been tested as base for more of 1000 companies, because
+  it is based in a mixtures of most common softwares in the Venezuelan
+  market what will allow for sure to accountants feel them first steps with
+  OpenERP more confortable.
+  .
+  This module doesn't pretend be the total localization for Venezuela,
+  but it will help you to start really quickly with OpenERP in this country.
+  .
+  This module give you.
+  ---------------------
+  .
+  - Basic taxes for Venezuela.
+  - Have basic data to run tests with community localization.
+  - Start a company from 0 if your needs are basic from an accounting PoV.
+  .
+  We recomend install account_anglo_saxon if you want valued your
+  stocks as Venezuela does with out invoices.
+  .
+  If you install this module, and select Custom chart a basic chart will be proposed,
+  but you will need set manually account defaults for taxes.
+
+Package: openerp7-addons-l10n-vn
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  openerp7-addons-base-vat,
+  openerp7-addons-base-iban,
+  ${misc:Depends}
+Conflicts: openerp-addons-l10n-vn
+Recommends: openerp7-server
+Description: OpenERP-7 module: l10n_vn
+  This is the module to manage the accounting chart for Vietnam in OpenERP.
+  ========================================================================
+  .
+  This module applies to companies based in Vietnamese Accounting Standard (VAS).
+  .
+  **Credits:** General Solutions.
+
+Package: openerp7-addons-lunch
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  ${misc:Depends}
+Conflicts: openerp-addons-lunch
+Recommends: openerp7-server
+Description: OpenERP-7 module: lunch
+  The base module to manage lunch.
+  ================================
+  .
+  Many companies order sandwiches, pizzas and other, from usual suppliers, for their employees to offer them more facilities.
+  .
+  However lunches management within the company requires proper administration especially when the number of employees or suppliers is important.
+  .
+  The “Lunch Order” module has been developed to make this management easier but also to offer employees more tools and usability.
+  .
+  In addition to a full meal and supplier management, this module offers the possibility to display warning and provides quick order selection based on employee’s preferences.
+  .
+  If you want to save your employees' time and avoid them to always have coins in their pockets, this module is essential.
+
+Package: openerp7-addons-mail
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  openerp7-addons-base-setup,
+  ${misc:Depends}
+Conflicts: openerp-addons-mail
+Recommends: openerp7-server
+Description: OpenERP-7 module: mail
+  Business oriented Social Networking
+  ===================================
+  The Social Networking module provides a unified social network abstraction layer allowing applications to display a complete
+  communication history on documents with a fully-integrated email and message management system.
+  .
+  It enables the users to read and send messages as well as emails. It also provides a feeds page combined to a subscription mechanism that allows to follow documents and to be constantly updated about recent news.
+  .
+  Main Features
+  -------------
+  * Clean and renewed communication history for any OpenERP document that can act as a discussion topic
+  * Subscription mechanism to be updated about new messages on interesting documents
+  * Unified feeds page to see recent messages and activity on followed documents
+  * User communication through the feeds page
+  * Threaded discussion design on documents
+  * Relies on the global outgoing mail server - an integrated email management system - allowing to send emails with a configurable scheduler-based processing engine
+  * Includes an extensible generic email composition assistant, that can turn into a mass-mailing assistant and is capable of interpreting simple *placeholder expressions* that will be replaced with dynamic data when each email is actually sent.
+
+Package: openerp7-addons-marketing
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  openerp7-addons-base-setup,
+  openerp7-addons-crm,
+  ${misc:Depends}
+Conflicts: openerp-addons-marketing
+Recommends: openerp7-server
+Description: OpenERP-7 module: marketing
+  Menu for Marketing.
+  ===================
+  .
+  Contains the installer for marketing-related modules.
+
+Package: openerp7-addons-marketing-campaign
+Section: net
+Architecture: all
+Depends:  openerp7-addons-marketing,
+  openerp7-addons-document,
+  openerp7-addons-email-template,
+  openerp7-addons-decimal-precision,
+  ${misc:Depends}
+Conflicts: openerp-addons-marketing-campaign
+Recommends: openerp7-server
+Description: OpenERP-7 module: marketing_campaign
+  This module provides leads automation through marketing campaigns (campaigns can in fact be defined on any resource, not just CRM Leads).
+  =========================================================================================================================================
+  .
+  The campaigns are dynamic and multi-channels. The process is as follows:
+  ------------------------------------------------------------------------
+  * Design marketing campaigns like workflows, including email templates to
+  send, reports to print and send by email, custom actions
+  * Define input segments that will select the items that should enter the
+  campaign (e.g leads from certain countries.)
+  * Run you campaign in simulation mode to test it real-time or accelerated,
+  and fine-tune it
+  * You may also start the real campaign in manual mode, where each action
+  requires manual validation
+  * Finally launch your campaign live, and watch the statistics as the
+  campaign does everything fully automatically.
+  .
+  While the campaign runs you can of course continue to fine-tune the parameters,
+  input segments, workflow.
+  .
+  **Note:** If you need demo data, you can install the marketing_campaign_crm_demo
+  module, but this will also install the CRM application as it depends on
+  CRM Leads.
+
+Package: openerp7-addons-marketing-campaign-crm-demo
+Section: net
+Architecture: all
+Depends:  openerp7-addons-marketing-campaign,
+  openerp7-addons-crm,
+  ${misc:Depends}
+Conflicts: openerp-addons-marketing-campaign-crm-demo
+Recommends: openerp7-server
+Description: OpenERP-7 module: marketing_campaign_crm_demo
+  Demo data for the module marketing_campaign.
+  ============================================
+  .
+  Creates demo data like leads, campaigns and segments for the module marketing_campaign.
+
+Package: openerp7-addons-membership
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  openerp7-addons-product,
+  openerp7-addons-account,
+  openerp7-addons-process,
+  ${misc:Depends}
+Conflicts: openerp-addons-membership
+Recommends: openerp7-server
+Description: OpenERP-7 module: membership
+  This module allows you to manage all operations for managing memberships.
+  =========================================================================
+  .
+  It supports different kind of members:
+  --------------------------------------
+  * Free member
+  * Associated member (e.g.: a group subscribes to a membership for all subsidiaries)
+  * Paid members
+  * Special member prices
+  .
+  It is integrated with sales and accounting to allow you to automatically
+  invoice and send propositions for membership renewal.
+
+Package: openerp7-addons-mrp
+Section: net
+Architecture: all
+Depends:  openerp7-addons-product,
+  openerp7-addons-procurement,
+  openerp7-addons-stock,
+  openerp7-addons-resource,
+  openerp7-addons-purchase,
+  openerp7-addons-process,
+  ${misc:Depends}
+Conflicts: openerp-addons-mrp
+Recommends: openerp7-server
+Description: OpenERP-7 module: mrp
+  Manage the Manufacturing process in OpenERP
+  ===========================================
+  .
+  The manufacturing module allows you to cover planning, ordering, stocks and the manufacturing or assembly of products from raw materials and components. It handles the consumption and production of products according to a bill of materials and the necessary operations on machinery, tools or human resources according to routings.
+  .
+  It supports complete integration and planification of stockable goods, consumables or services. Services are completely integrated with the rest of the software. For instance, you can set up a sub-contracting service in a bill of materials to automatically purchase on order the assembly of your production.
+  .
+  Key Features
+  ------------
+  * Make to Stock/Make to Order
+  * Multi-level bill of materials, no limit
+  * Multi-level routing, no limit
+  * Routing and work center integrated with analytic accounting
+  * Periodical scheduler computation
+  * Allows to browse bills of materials in a complete structure that includes child and phantom bills of materials
+  .
+  Dashboard / Reports for MRP will include:
+  -----------------------------------------
+  * Procurements in Exception (Graph)
+  * Stock Value Variation (Graph)
+  * Work Order Analysis
+
+Package: openerp7-addons-mrp-byproduct
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  openerp7-addons-mrp,
+  ${misc:Depends}
+Conflicts: openerp-addons-mrp-byproduct
+Recommends: openerp7-server
+Description: OpenERP-7 module: mrp_byproduct
+  This module allows you to produce several products from one production order.
+  =============================================================================
+  .
+  You can configure by-products in the bill of material.
+  .
+  Without this module:
+  --------------------
+  A + B + C -> D
+  .
+  With this module:
+  -----------------
+  A + B + C -> D + E
+
+Package: openerp7-addons-mrp-jit
+Section: net
+Architecture: all
+Depends:  openerp7-addons-procurement,
+  ${misc:Depends}
+Conflicts: openerp-addons-mrp-jit
+Recommends: openerp7-server
+Description: OpenERP-7 module: mrp_jit
+  This module allows Just In Time computation of procurement orders.
+  ==================================================================
+  .
+  If you install this module, you will not have to run the regular procurement
+  scheduler anymore (but you still need to run the minimum order point rule
+  scheduler, or for example let it run daily).
+  All procurement orders will be processed immediately, which could in some
+  cases entail a small performance impact.
+  .
+  It may also increase your stock size because products are reserved as soon
+  as possible and the scheduler time range is not taken into account anymore.
+  In that case, you can not use priorities any more on the different picking.
+
+Package: openerp7-addons-mrp-operations
+Section: net
+Architecture: all
+Depends:  openerp7-addons-mrp,
+  ${misc:Depends}
+Conflicts: openerp-addons-mrp-operations
+Recommends: openerp7-server
+Description: OpenERP-7 module: mrp_operations
+  This module adds state, date_start, date_stop in manufacturing order operation lines (in the 'Work Orders' tab).
+  ================================================================================================================
+  .
+  Status: draft, confirm, done, cancel
+  When finishing/confirming, cancelling manufacturing orders set all state lines
+  to the according state.
+  .
+  Create menus:
+  -------------
+  **Manufacturing** > **Manufacturing** > **Work Orders**
+  .
+  Which is a view on 'Work Orders' lines in manufacturing order.
+  .
+  Add buttons in the form view of manufacturing order under workorders tab:
+  -------------------------------------------------------------------------
+  * start (set state to confirm), set date_start
+  * done (set state to done), set date_stop
+  * set to draft (set state to draft)
+  * cancel set state to cancel
+  .
+  When the manufacturing order becomes 'ready to produce', operations must
+  become 'confirmed'. When the manufacturing order is done, all operations
+  must become done.
+  .
+  The field 'Working Hours' is the delay(stop date - start date).
+  So, that we can compare the theoretic delay and real delay.
+
+Package: openerp7-addons-mrp-repair
+Section: net
+Architecture: all
+Depends:  openerp7-addons-mrp,
+  openerp7-addons-sale,
+  openerp7-addons-account,
+  ${misc:Depends}
+Conflicts: openerp-addons-mrp-repair
+Recommends: openerp7-server
+Description: OpenERP-7 module: mrp_repair
+  The aim is to have a complete module to manage all products repairs.
+  ====================================================================
+  .
+  The following topics should be covered by this module:
+  ------------------------------------------------------
+  * Add/remove products in the reparation
+  * Impact for stocks
+  * Invoicing (products and/or services)
+  * Warranty concept
+  * Repair quotation report
+  * Notes for the technician and for the final customer
+
+Package: openerp7-addons-multi-company
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  openerp7-addons-sale-stock,
+  openerp7-addons-project,
+  ${misc:Depends}
+Conflicts: openerp-addons-multi-company
+Recommends: openerp7-server
+Description: OpenERP-7 module: multi_company
+  This module is for managing a multicompany environment.
+  =======================================================
+  .
+  This module is the base module for other multi-company modules.
+
+Package: openerp7-addons-note
+Section: net
+Architecture: all
+Depends:  openerp7-addons-mail,
+  ${misc:Depends}
+Conflicts: openerp-addons-note
+Recommends: openerp7-server
+Description: OpenERP-7 module: note
+  This module allows users to create their own notes inside OpenERP
+  =================================================================
+  .
+  Use notes to write meeting minutes, organize ideas, organize personnal todo
+  lists, etc. Each user manages his own personnal Notes. Notes are available to
+  their authors only, but they can share notes to others users so that several
+  people can work on the same note in real time. It's very efficient to share
+  meeting minutes.
+  .
+  Notes can be found in the 'Home' menu.
+
+Package: openerp7-addons-note-pad
+Section: net
+Architecture: all
+Depends:  openerp7-addons-mail,
+  openerp7-addons-pad,
+  openerp7-addons-note,
+  ${misc:Depends}
+Conflicts: openerp-addons-note-pad
+Recommends: openerp7-server
+Description: OpenERP-7 module: note_pad
+  This module update memos inside OpenERP for using an external pad
+  =================================================================
+  .
+  Use for update your text memo in real time with the following user that you invite.
+
+Package: openerp7-addons-pad
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  ${misc:Depends}
+Conflicts: openerp-addons-pad
+Recommends: openerp7-server
+Description: OpenERP-7 module: pad
+  Adds enhanced support for (Ether)Pad attachments in the web client.
+  ===================================================================
+  .
+  Lets the company customize which Pad installation should be used to link to new
+  pads (by default, http://ietherpad.com/).
+
+Package: openerp7-addons-pad-project
+Section: net
+Architecture: all
+Depends:  openerp7-addons-project,
+  openerp7-addons-pad,
+  ${misc:Depends}
+Conflicts: openerp-addons-pad-project
+Recommends: openerp7-server
+Description: OpenERP-7 module: pad_project
+  This module adds a PAD in all project kanban views.
+  ===================================================
+
+Package: openerp7-addons-plugin
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  ${misc:Depends}
+Conflicts: openerp-addons-plugin
+Recommends: openerp7-server
+Description: OpenERP-7 module: plugin
+  The common interface for plug-in.
+  =================================
+
+Package: openerp7-addons-plugin-outlook
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  openerp7-addons-mail,
+  openerp7-addons-plugin,
+  ${misc:Depends}
+Conflicts: openerp-addons-plugin-outlook
+Recommends: openerp7-server
+Description: OpenERP-7 module: plugin_outlook
+  This module provides the Outlook Plug-in.
+  =========================================
+  .
+  Outlook plug-in allows you to select an object that you would like to add to
+  your email and its attachments from MS Outlook. You can select a partner, a task,
+  a project, an analytical account, or any other object and archive selected mail
+  into mail.message with attachments.
+
+Package: openerp7-addons-plugin-thunderbird
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  openerp7-addons-mail,
+  openerp7-addons-plugin,
+  ${misc:Depends}
+Conflicts: openerp-addons-plugin-thunderbird
+Recommends: openerp7-server
+Description: OpenERP-7 module: plugin_thunderbird
+  This module is required for the Thuderbird Plug-in to work properly.
+  ====================================================================
+  .
+  The plugin allows you archive email and its attachments to the selected
+  OpenERP objects. You can select a partner, a task, a project, an analytical
+  account, or any other object and attach the selected mail as a .eml file in
+  the attachment of a selected record. You can create documents for CRM Lead,
+  HR Applicant and Project Issue from selected mails.
+
+Package: openerp7-addons-point-of-sale
+Section: net
+Architecture: all
+Depends:  openerp7-addons-sale-stock,
+  ${misc:Depends}
+Conflicts: openerp-addons-point-of-sale
+Recommends: openerp7-server
+Description: OpenERP-7 module: point_of_sale
+  Quick and Easy sale process
+  ===========================
+  .
+  This module allows you to manage your shop sales very easily with a fully web based touchscreen interface.
+  It is compatible with all PC tablets and the iPad, offering multiple payment methods.
+  .
+  Product selection can be done in several ways:
+  .
+  * Using a barcode reader
+  * Browsing through categories of products or via a text search.
+  .
+  Main Features
+  -------------
+  * Fast encoding of the sale
+  * Choose one payment method (the quick way) or split the payment between several payment methods
+  * Computation of the amount of money to return
+  * Create and confirm the picking list automatically
+  * Allows the user to create an invoice automatically
+  * Refund previous sales
+
+Package: openerp7-addons-portal
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  openerp7-addons-share,
+  openerp7-addons-auth-signup,
+  ${misc:Depends}
+Conflicts: openerp-addons-portal
+Recommends: openerp7-server
+Description: OpenERP-7 module: portal
+  Customize access to your OpenERP database to external users by creating portals.
+  ================================================================================
+  A portal defines a specific user menu and access rights for its members.  This
+  menu can ben seen by portal members, anonymous users and any other user that
+  have the access to technical features (e.g. the administrator).
+  Also, each portal member is linked to a specific partner.
+  .
+  The module also associates user groups to the portal users (adding a group in
+  the portal automatically adds it to the portal users, etc).  That feature is
+  very handy when used in combination with the module 'share'.
+
+Package: openerp7-addons-portal-anonymous
+Section: net
+Architecture: all
+Depends:  openerp7-addons-portal,
+  openerp7-addons-web,
+  ${misc:Depends}
+Conflicts: openerp-addons-portal-anonymous
+Recommends: openerp7-server
+Description: OpenERP-7 module: portal_anonymous
+  Allow anonymous to Access Portal.
+  =================================
+
+Package: openerp7-addons-portal-claim
+Section: net
+Architecture: all
+Depends:  openerp7-addons-crm-claim,
+  openerp7-addons-portal,
+  ${misc:Depends}
+Conflicts: openerp-addons-portal-claim
+Recommends: openerp7-server
+Description: OpenERP-7 module: portal_claim
+  This module adds claim menu and features to your portal if claim and portal are installed.
+  ==========================================================================================
+
+Package: openerp7-addons-portal-crm
+Section: net
+Architecture: all
+Depends:  openerp7-addons-crm,
+  openerp7-addons-portal,
+  ${misc:Depends}
+Conflicts: openerp-addons-portal-crm
+Recommends: openerp7-server
+Description: OpenERP-7 module: portal_crm
+  This module adds a contact page (with a contact form creating a lead when submitted) to your portal if crm and portal are installed.
+  ====================================================================================================================================
+
+Package: openerp7-addons-portal-event
+Section: net
+Architecture: all
+Depends:  openerp7-addons-event,
+  openerp7-addons-portal,
+  ${misc:Depends}
+Conflicts: openerp-addons-portal-event
+Recommends: openerp7-server
+Description: OpenERP-7 module: portal_event
+  This module adds event menu and features to your portal if event and portal are installed.
+  ==========================================================================================
+
+Package: openerp7-addons-portal-hr-employees
+Section: net
+Architecture: all
+Depends:  openerp7-addons-hr,
+  openerp7-addons-portal-crm,
+  ${misc:Depends}
+Conflicts: openerp-addons-portal-hr-employees
+Recommends: openerp7-server
+Description: OpenERP-7 module: portal_hr_employees
+  This module adds a list of employees to your portal's contact page if hr and portal_crm (which creates the contact page) are installed.
+  =======================================================================================================================================
+
+Package: openerp7-addons-portal-project
+Section: net
+Architecture: all
+Depends:  openerp7-addons-project,
+  openerp7-addons-portal,
+  ${misc:Depends}
+Conflicts: openerp-addons-portal-project
+Recommends: openerp7-server
+Description: OpenERP-7 module: portal_project
+  This module adds project menu and features (tasks) to your portal if project and portal are installed.
+  ======================================================================================================
+
+Package: openerp7-addons-portal-project-issue
+Section: net
+Architecture: all
+Depends:  openerp7-addons-project-issue,
+  openerp7-addons-portal,
+  ${misc:Depends}
+Conflicts: openerp-addons-portal-project-issue
+Recommends: openerp7-server
+Description: OpenERP-7 module: portal_project_issue
+  This module adds issue menu and features to your portal if project_issue and portal are installed.
+  ==================================================================================================
+
+Package: openerp7-addons-portal-project-long-term
+Section: net
+Architecture: all
+Depends:  openerp7-addons-project-long-term,
+  openerp7-addons-portal,
+  ${misc:Depends}
+Conflicts: openerp-addons-portal-project-long-term
+Recommends: openerp7-server
+Description: OpenERP-7 module: portal_project_long_term
+  This module adds necessary security rules and access rights for project long term and portal.
+  =============================================================================================
+
+Package: openerp7-addons-portal-sale
+Section: net
+Architecture: all
+Depends:  openerp7-addons-sale,
+  openerp7-addons-portal,
+  ${misc:Depends}
+Conflicts: openerp-addons-portal-sale
+Recommends: openerp7-server
+Description: OpenERP-7 module: portal_sale
+  This module adds a Sales menu to your portal as soon as sale and portal are installed.
+  ======================================================================================
+  .
+  After installing this module, portal users will be able to access their own documents
+  via the following menus:
+  .
+  - Quotations
+  - Sale Orders
+  - Delivery Orders
+  - Products (public ones)
+  - Invoices
+  - Payments/Refunds
+  .
+  If online payment acquirers are configured, portal users will also be given the opportunity to
+  pay online on their Sale Orders and Invoices that are not paid yet. Paypal is included
+  by default, you simply need to configure a Paypal account in the Accounting/Invoicing settings.
+
+Package: openerp7-addons-portal-stock
+Section: net
+Architecture: all
+Depends:  openerp7-addons-sale-stock,
+  openerp7-addons-portal,
+  ${misc:Depends}
+Conflicts: openerp-addons-portal-stock
+Recommends: openerp7-server
+Description: OpenERP-7 module: portal_stock
+  This module adds access rules to your portal if stock and portal are installed.
+  ==========================================================================================
+
+Package: openerp7-addons-process
+Section: net
+Architecture: all
+Depends:  openerp7-addons-web,
+  ${misc:Depends}
+Conflicts: openerp-addons-process
+Recommends: openerp7-server
+Description: OpenERP-7 module: process
+  This module shows the basic processes involved in the selected modules and in the sequence they occur.
+  ======================================================================================================
+  .
+  **Note:** This applies to the modules containing modulename_process.xml.
+  .
+  **e.g.** product/process/product_process.xml.
+
+Package: openerp7-addons-procurement
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  openerp7-addons-process,
+  openerp7-addons-product,
+  openerp7-addons-stock,
+  ${misc:Depends}
+Conflicts: openerp-addons-procurement
+Recommends: openerp7-server
+Description: OpenERP-7 module: procurement
+  This is the module for computing Procurements.
+  ==============================================
+  .
+  In the MRP process, procurements orders are created to launch manufacturing
+  orders, purchase orders, stock allocations. Procurement orders are
+  generated automatically by the system and unless there is a problem, the
+  user will not be notified. In case of problems, the system will raise some
+  procurement exceptions to inform the user about blocking problems that need
+  to be resolved manually (like, missing BoM structure or missing supplier).
+  .
+  The procurement order will schedule a proposal for automatic procurement
+  for the product which needs replenishment. This procurement will start a
+  task, either a purchase order form for the supplier, or a production order
+  depending on the product's configuration.
+
+Package: openerp7-addons-product
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  openerp7-addons-process,
+  openerp7-addons-decimal-precision,
+  openerp7-addons-mail,
+  ${misc:Depends}
+Conflicts: openerp-addons-product
+Recommends: openerp7-server
+Description: OpenERP-7 module: product
+  This is the base module for managing products and pricelists in OpenERP.
+  ========================================================================
+  .
+  Products support variants, different pricing methods, suppliers information,
+  make to stock/order, different unit of measures, packaging and properties.
+  .
+  Pricelists support:
+  -------------------
+  * Multiple-level of discount (by product, category, quantities)
+  * Compute price based on different criteria:
+  * Other pricelist
+  * Cost price
+  * List price
+  * Supplier price
+  .
+  Pricelists preferences by product and/or partners.
+  .
+  Print product labels with barcode.
+
+Package: openerp7-addons-product-expiry
+Section: net
+Architecture: all
+Depends:  openerp7-addons-stock,
+  ${misc:Depends}
+Conflicts: openerp-addons-product-expiry
+Recommends: openerp7-server
+Description: OpenERP-7 module: product_expiry
+  Track different dates on products and production lots.
+  ======================================================
+  .
+  Following dates can be tracked:
+  -------------------------------
+  - end of life
+  - best before date
+  - removal date
+  - alert date
+  .
+  Used, for example, in food industries.
+
+Package: openerp7-addons-product-manufacturer
+Section: net
+Architecture: all
+Depends:  openerp7-addons-stock,
+  ${misc:Depends}
+Conflicts: openerp-addons-product-manufacturer
+Recommends: openerp7-server
+Description: OpenERP-7 module: product_manufacturer
+  A module that adds manufacturers and attributes on the product form.
+  ====================================================================
+  .
+  You can now define the following for a product:
+  -----------------------------------------------
+  * Manufacturer
+  * Manufacturer Product Name
+  * Manufacturer Product Code
+  * Product Attributes
+
+Package: openerp7-addons-product-margin
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account,
+  ${misc:Depends}
+Conflicts: openerp-addons-product-margin
+Recommends: openerp7-server
+Description: OpenERP-7 module: product_margin
+  Adds a reporting menu in products that computes sales, purchases, margins and other interesting indicators based on invoices.
+  =============================================================================================================================
+  .
+  The wizard to launch the report has several options to help you get the data you need.
+
+Package: openerp7-addons-product-visible-discount
+Section: net
+Architecture: all
+Depends:  openerp7-addons-sale,
+  openerp7-addons-purchase,
+  ${misc:Depends}
+Conflicts: openerp-addons-product-visible-discount
+Recommends: openerp7-server
+Description: OpenERP-7 module: product_visible_discount
+  This module lets you calculate discounts on Sale Order lines and Invoice lines base on the partner's pricelist.
+  ===============================================================================================================
+  .
+  To this end, a new check box named 'Visible Discount' is added to the pricelist form.
+  .
+  **Example:**
+  For the product PC1 and the partner "Asustek": if listprice=450, and the price
+  calculated using Asustek's pricelist is 225. If the check box is checked, we
+  will have on the sale order line: Unit price=450, Discount=50,00, Net price=225.
+  If the check box is unchecked, we will have on Sale Order and Invoice lines:
+  Unit price=225, Discount=0,00, Net price=225.
+
+Package: openerp7-addons-project
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base-setup,
+  openerp7-addons-base-status,
+  openerp7-addons-product,
+  openerp7-addons-analytic,
+  openerp7-addons-board,
+  openerp7-addons-mail,
+  openerp7-addons-resource,
+  openerp7-addons-web-kanban,
+  ${misc:Depends}
+Conflicts: openerp-addons-project
+Recommends: openerp7-server
+Description: OpenERP-7 module: project
+  Track multi-level projects, tasks, work done on tasks
+  =====================================================
+  .
+  This application allows an operational project management system to organize your activities into tasks and plan the work you need to get the tasks completed.
+  .
+  Gantt diagrams will give you a graphical representation of your project plans, as well as resources availability and workload.
+  .
+  Dashboard / Reports for Project Management will include:
+  --------------------------------------------------------
+  * My Tasks
+  * Open Tasks
+  * Tasks Analysis
+  * Cumulative Flow
+
+Package: openerp7-addons-project-gtd
+Section: net
+Architecture: all
+Depends:  openerp7-addons-project,
+  ${misc:Depends}
+Conflicts: openerp-addons-project-gtd
+Recommends: openerp7-server
+Description: OpenERP-7 module: project_gtd
+  Implement concepts of the "Getting Things Done" methodology
+  ===========================================================
+  .
+  This module implements a simple personal to-do list based on tasks. It adds an editable list of tasks simplified to the minimum required fields in the project application.
+  .
+  The to-do list is based on the GTD methodology. This world-wide used methodology is used for personal time management improvement.
+  .
+  Getting Things Done (commonly abbreviated as GTD) is an action management method created by David Allen, and described in a book of the same name.
+  .
+  GTD rests on the principle that a person needs to move tasks out of the mind by recording them externally. That way, the mind is freed from the job of remembering everything that needs to be done, and can concentrate on actually performing those tasks.
+
+Package: openerp7-addons-project-issue
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base-status,
+  openerp7-addons-crm,
+  openerp7-addons-project,
+  ${misc:Depends}
+Conflicts: openerp-addons-project-issue
+Recommends: openerp7-server
+Description: OpenERP-7 module: project_issue
+  Track Issues/Bugs Management for Projects
+  =========================================
+  This application allows you to manage the issues you might face in a project like bugs in a system, client complaints or material breakdowns.
+  .
+  It allows the manager to quickly check the issues, assign them and decide on their status quickly as they evolve.
+
+Package: openerp7-addons-project-issue-sheet
+Section: net
+Architecture: all
+Depends:  openerp7-addons-project-issue,
+  openerp7-addons-hr-timesheet-sheet,
+  ${misc:Depends}
+Conflicts: openerp-addons-project-issue-sheet
+Recommends: openerp7-server
+Description: OpenERP-7 module: project_issue_sheet
+  This module adds the Timesheet support for the Issues/Bugs Management in Project.
+  =================================================================================
+  .
+  Worklogs can be maintained to signify number of hours spent by users to handle an issue.
+
+Package: openerp7-addons-project-long-term
+Section: net
+Architecture: all
+Depends:  openerp7-addons-project,
+  ${misc:Depends}
+Conflicts: openerp-addons-project-long-term
+Recommends: openerp7-server
+Description: OpenERP-7 module: project_long_term
+  Long Term Project management module that tracks planning, scheduling, resources allocation.
+  ===========================================================================================
+  .
+  Features:
+  ---------
+  * Manage Big project
+  * Define various Phases of Project
+  * Compute Phase Scheduling: Compute start date and end date of the phases
+  which are in draft, open and pending state of the project given. If no
+  project given then all the draft, open and pending state phases will be taken.
+  * Compute Task Scheduling: This works same as the scheduler button on
+  project.phase. It takes the project as argument and computes all the open,
+  draft and pending tasks.
+  * Schedule Tasks: All the tasks which are in draft, pending and open state
+  are scheduled with taking the phase's start date.
+
+Package: openerp7-addons-project-mrp
+Section: net
+Architecture: all
+Depends:  openerp7-addons-project,
+  openerp7-addons-procurement,
+  openerp7-addons-sale,
+  openerp7-addons-mrp-jit,
+  ${misc:Depends}
+Conflicts: openerp-addons-project-mrp
+Recommends: openerp7-server
+Description: OpenERP-7 module: project_mrp
+  Automatically creates project tasks from procurement lines.
+  ===========================================================
+  .
+  This module will automatically create a new task for each procurement order line
+  (e.g. for sale order lines), if the corresponding product meets the following
+  characteristics:
+  .
+  * Product Type = Service
+  * Procurement Method (Order fulfillment) = MTO (Make to Order)
+  * Supply/Procurement Method = Manufacture
+  .
+  If on top of that a projet is specified on the product form (in the Procurement
+  tab), then the new task will be created in that specific project. Otherwise, the
+  new task will not belong to any project, and may be added to a project manually
+  later.
+  .
+  When the project task is completed or cancelled, the workflow of the corresponding
+  procurement line is updated accordingly. For example, if this procurement corresponds
+  to a sale order line, the sale order line will be considered delivered when the
+  task is completed.
+
+Package: openerp7-addons-project-timesheet
+Section: net
+Architecture: all
+Depends:  openerp7-addons-project,
+  openerp7-addons-hr-timesheet-sheet,
+  openerp7-addons-hr-timesheet-invoice,
+  openerp7-addons-account-analytic-analysis,
+  ${misc:Depends}
+Conflicts: openerp-addons-project-timesheet
+Recommends: openerp7-server
+Description: OpenERP-7 module: project_timesheet
+  Synchronization of project task work entries with timesheet entries.
+  ====================================================================
+  .
+  This module lets you transfer the entries under tasks defined for Project
+  Management to the Timesheet line entries for particular date and particular user
+  with the effect of creating, editing and deleting either ways.
+
+Package: openerp7-addons-purchase
+Section: net
+Architecture: all
+Depends:  openerp7-addons-stock,
+  openerp7-addons-process,
+  openerp7-addons-procurement,
+  ${misc:Depends}
+Conflicts: openerp-addons-purchase
+Recommends: openerp7-server
+Description: OpenERP-7 module: purchase
+  Manage goods requirement by Purchase Orders easily
+  ==================================================
+  .
+  Purchase management enables you to track your suppliers' price quotations and convert them into purchase orders if necessary.
+  OpenERP has several methods of monitoring invoices and tracking the receipt of ordered goods. You can handle partial deliveries in OpenERP, so you can keep track of items that are still to be delivered in your orders, and you can issue reminders automatically.
+  .
+  OpenERP’s replenishment management rules enable the system to generate draft purchase orders automatically, or you can configure it to run a lean process driven entirely by current production needs.
+  .
+  Dashboard / Reports for Purchase Management will include:
+  ---------------------------------------------------------
+  * Request for Quotations
+  * Purchase Orders Waiting Approval
+  * Monthly Purchases by Category
+  * Receptions Analysis
+  * Purchase Analysis
+
+Package: openerp7-addons-purchase-analytic-plans
+Section: net
+Architecture: all
+Depends:  openerp7-addons-purchase,
+  openerp7-addons-account-analytic-plans,
+  ${misc:Depends}
+Conflicts: openerp-addons-purchase-analytic-plans
+Recommends: openerp7-server
+Description: OpenERP-7 module: purchase_analytic_plans
+  The base module to manage analytic distribution and purchase orders.
+  ====================================================================
+  .
+  Allows the user to maintain several analysis plans. These let you split a line
+  on a supplier purchase order into several accounts and analytic plans.
+
+Package: openerp7-addons-purchase-double-validation
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  openerp7-addons-purchase,
+  ${misc:Depends}
+Conflicts: openerp-addons-purchase-double-validation
+Recommends: openerp7-server
+Description: OpenERP-7 module: purchase_double_validation
+  Double-validation for purchases exceeding minimum amount.
+  =========================================================
+  .
+  This module modifies the purchase workflow in order to validate purchases that
+  exceeds minimum amount set by configuration wizard.
+
+Package: openerp7-addons-purchase-requisition
+Section: net
+Architecture: all
+Depends:  openerp7-addons-purchase,
+  ${misc:Depends}
+Conflicts: openerp-addons-purchase-requisition
+Recommends: openerp7-server
+Description: OpenERP-7 module: purchase_requisition
+  This module allows you to manage your Purchase Requisition.
+  ===========================================================
+  .
+  When a purchase order is created, you now have the opportunity to save the
+  related requisition. This new object will regroup and will allow you to easily
+  keep track and order all your purchase orders.
+
+Package: openerp7-addons-report-intrastat
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  openerp7-addons-product,
+  openerp7-addons-stock,
+  openerp7-addons-sale,
+  openerp7-addons-purchase,
+  ${misc:Depends}
+Conflicts: openerp-addons-report-intrastat
+Recommends: openerp7-server
+Description: OpenERP-7 module: report_intrastat
+  A module that adds intrastat reports.
+  =====================================
+  .
+  This module gives the details of the goods traded between the countries of
+  European Union.
+
+Package: openerp7-addons-report-webkit
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  ${misc:Depends}
+Conflicts: openerp-addons-report-webkit
+Recommends: openerp7-server
+Description: OpenERP-7 module: report_webkit
+  This module adds a new Report Engine based on WebKit library (wkhtmltopdf) to support reports designed in HTML + CSS.
+  =====================================================================================================================
+  .
+  The module structure and some code is inspired by the report_openoffice module.
+  .
+  The module allows:
+  ------------------
+  - HTML report definition
+  - Multi header support
+  - Multi logo
+  - Multi company support
+  - HTML and CSS-3 support (In the limit of the actual WebKIT version)
+  - JavaScript support
+  - Raw HTML debugger
+  - Book printing capabilities
+  - Margins definition
+  - Paper size definition
+  .
+  Multiple headers and logos can be defined per company. CSS style, header and
+  footer body are defined per company.
+  .
+  For a sample report see also the webkit_report_sample module, and this video:
+  http://files.me.com/nbessi/06n92k.mov
+  .
+  Requirements and Installation:
+  ------------------------------
+  This module requires the ``wkthtmltopdf`` library to render HTML documents as
+  PDF. Version 0.9.9 or later is necessary, and can be found at
+  http://code.google.com/p/wkhtmltopdf/ for Linux, Mac OS X (i386) and Windows (32bits).
+  .
+  After installing the library on the OpenERP Server machine, you need to set the
+  path to the ``wkthtmltopdf`` executable file on each Company.
+  .
+  If you are experiencing missing header/footer problems on Linux, be sure to
+  install a 'static' version of the library. The default ``wkhtmltopdf`` on
+  Ubuntu is known to have this issue.
+  .
+  .
+  TODO:
+  -----
+  * JavaScript support activation deactivation
+  * Collated and book format support
+  * Zip return for separated PDF
+  * Web client WYSIWYG
+
+Package: openerp7-addons-resource
+Section: net
+Architecture: all
+Depends:  openerp7-addons-process,
+  ${misc:Depends}
+Conflicts: openerp-addons-resource
+Recommends: openerp7-server
+Description: OpenERP-7 module: resource
+  Module for resource management.
+  ===============================
+  .
+  A resource represent something that can be scheduled (a developer on a task or a
+  work center on manufacturing orders). This module manages a resource calendar
+  associated to every resource. It also manages the leaves of every resource.
+
+Package: openerp7-addons-sale
+Section: net
+Architecture: all
+Depends:  openerp7-addons-account-voucher,
+  ${misc:Depends}
+Conflicts: openerp-addons-sale
+Recommends: openerp7-server
+Description: OpenERP-7 module: sale
+  Manage sales quotations and orders
+  ==================================
+  .
+  This application allows you to manage your sales goals in an effective and efficient manner by keeping track of all sales orders and history.
+  .
+  It handles the full sales workflow:
+  .
+  * **Quotation** -> **Sales order** -> **Invoice**
+  .
+  Preferences (only with Warehouse Management installed)
+  ------------------------------------------------------
+  .
+  If you also installed the Warehouse Management, you can deal with the following preferences:
+  .
+  * Shipping: Choice of delivery at once or partial delivery
+  * Invoicing: choose how invoices will be paid
+  * Incoterms: International Commercial terms
+  .
+  You can choose flexible invoicing methods:
+  .
+  * *On Demand*: Invoices are created manually from Sales Orders when needed
+  * *On Delivery Order*: Invoices are generated from picking (delivery)
+  * *Before Delivery*: A Draft invoice is created and must be paid before delivery
+  .
+  .
+  The Dashboard for the Sales Manager will include
+  ------------------------------------------------
+  * My Quotations
+  * Monthly Turnover (Graph)
+
+Package: openerp7-addons-sale-analytic-plans
+Section: net
+Architecture: all
+Depends:  openerp7-addons-sale,
+  openerp7-addons-account-analytic-plans,
+  ${misc:Depends}
+Conflicts: openerp-addons-sale-analytic-plans
+Recommends: openerp7-server
+Description: OpenERP-7 module: sale_analytic_plans
+  The base module to manage analytic distribution and sales orders.
+  =================================================================
+  .
+  Using this module you will be able to link analytic accounts to sales orders.
+
+Package: openerp7-addons-sale-crm
+Section: net
+Architecture: all
+Depends:  openerp7-addons-sale,
+  openerp7-addons-crm,
+  ${misc:Depends}
+Conflicts: openerp-addons-sale-crm
+Recommends: openerp7-server
+Description: OpenERP-7 module: sale_crm
+  This module adds a shortcut on one or several opportunity cases in the CRM.
+  ===========================================================================
+  .
+  This shortcut allows you to generate a sales order based on the selected case.
+  If different cases are open (a list), it generates one sale order by case.
+  The case is then closed and linked to the generated sales order.
+  .
+  We suggest you to install this module, if you installed both the sale and the crm
+  modules.
+
+Package: openerp7-addons-sale-journal
+Section: net
+Architecture: all
+Depends:  openerp7-addons-sale-stock,
+  ${misc:Depends}
+Conflicts: openerp-addons-sale-journal
+Recommends: openerp7-server
+Description: OpenERP-7 module: sale_journal
+  The sales journal modules allows you to categorise your sales and deliveries (picking lists) between different journals.
+  ========================================================================================================================
+  .
+  This module is very helpful for bigger companies that works by departments.
+  .
+  You can use journal for different purposes, some examples:
+  ----------------------------------------------------------
+  * isolate sales of different departments
+  * journals for deliveries by truck or by UPS
+  .
+  Journals have a responsible and evolves between different status:
+  -----------------------------------------------------------------
+  * draft, open, cancel, done.
+  .
+  Batch operations can be processed on the different journals to confirm all sales
+  at once, to validate or invoice packing.
+  .
+  It also supports batch invoicing methods that can be configured by partners and sales orders, examples:
+  -------------------------------------------------------------------------------------------------------
+  * daily invoicing
+  * monthly invoicing
+  .
+  Some statistics by journals are provided.
+
+Package: openerp7-addons-sale-margin
+Section: net
+Architecture: all
+Depends:  openerp7-addons-sale,
+  ${misc:Depends}
+Conflicts: openerp-addons-sale-margin
+Recommends: openerp7-server
+Description: OpenERP-7 module: sale_margin
+  This module adds the 'Margin' on sales order.
+  =============================================
+  .
+  This gives the profitability by calculating the difference between the Unit
+  Price and Cost Price.
+
+Package: openerp7-addons-sale-mrp
+Section: net
+Architecture: all
+Depends:  openerp7-addons-mrp,
+  openerp7-addons-sale-stock,
+  ${misc:Depends}
+Conflicts: openerp-addons-sale-mrp
+Recommends: openerp7-server
+Description: OpenERP-7 module: sale_mrp
+  This module provides facility to the user to install mrp and sales modulesat a time.
+  ====================================================================================
+  .
+  It is basically used when we want to keep track of production orders generated
+  from sales order. It adds sales name and sales Reference on production order.
+
+Package: openerp7-addons-sale-order-dates
+Section: net
+Architecture: all
+Depends:  openerp7-addons-sale-stock,
+  ${misc:Depends}
+Conflicts: openerp-addons-sale-order-dates
+Recommends: openerp7-server
+Description: OpenERP-7 module: sale_order_dates
+  Add additional date information to the sales order.
+  ===================================================
+  .
+  You can add the following additional dates to a sales order:
+  ------------------------------------------------------------
+  * Requested Date
+  * Commitment Date
+  * Effective Date
+
+Package: openerp7-addons-sale-stock
+Section: net
+Architecture: all
+Depends:  openerp7-addons-sale,
+  openerp7-addons-stock,
+  openerp7-addons-procurement,
+  ${misc:Depends}
+Conflicts: openerp-addons-sale-stock
+Recommends: openerp7-server
+Description: OpenERP-7 module: sale_stock
+  Manage sales quotations and orders
+  ==================================
+  .
+  This module makes the link between the sales and warehouses management applications.
+  .
+  Preferences
+  -----------
+  * Shipping: Choice of delivery at once or partial delivery
+  * Invoicing: choose how invoices will be paid
+  * Incoterms: International Commercial terms
+  .
+  You can choose flexible invoicing methods:
+  .
+  * *On Demand*: Invoices are created manually from Sales Orders when needed
+  * *On Delivery Order*: Invoices are generated from picking (delivery)
+  * *Before Delivery*: A Draft invoice is created and must be paid before delivery
+
+Package: openerp7-addons-share
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  openerp7-addons-mail,
+  ${misc:Depends}
+Conflicts: openerp-addons-share
+Recommends: openerp7-server
+Description: OpenERP-7 module: share
+  This module adds generic sharing tools to your current OpenERP database.
+  ========================================================================
+  .
+  It specifically adds a 'share' button that is available in the Web client to
+  share any kind of OpenERP data with colleagues, customers, friends.
+  .
+  The system will work by creating new users and groups on the fly, and by
+  combining the appropriate access rights and ir.rules to ensure that the shared
+  users only have access to the data that has been shared with them.
+  .
+  This is extremely useful for collaborative work, knowledge sharing,
+  synchronization with other companies.
+
+Package: openerp7-addons-stock
+Section: net
+Architecture: all
+Depends:  openerp7-addons-product,
+  openerp7-addons-account,
+  ${misc:Depends}
+Conflicts: openerp-addons-stock
+Recommends: openerp7-server
+Description: OpenERP-7 module: stock
+  Manage multi-warehouses, multi- and structured stock locations
+  ==============================================================
+  .
+  The warehouse and inventory management is based on a hierarchical location structure, from warehouses to storage bins.
+  The double entry inventory system allows you to manage customers, suppliers as well as manufacturing inventories.
+  .
+  OpenERP has the capacity to manage lots and serial numbers ensuring compliance with the traceability requirements imposed by the majority of industries.
+  .
+  Key Features
+  ------------
+  * Moves history and planning,
+  * Stock valuation (standard or average price, ...)
+  * Robustness faced with Inventory differences
+  * Automatic reordering rules
+  * Support for barcodes
+  * Rapid detection of mistakes through double entry system
+  * Traceability (Upstream / Downstream, Serial numbers, ...)
+  .
+  Dashboard / Reports for Warehouse Management will include:
+  ----------------------------------------------------------
+  * Incoming Products (Graph)
+  * Outgoing Products (Graph)
+  * Procurement in Exception
+  * Inventory Analysis
+  * Last Product Inventories
+  * Moves Analysis
+
+Package: openerp7-addons-stock-invoice-directly
+Section: net
+Architecture: all
+Depends:  openerp7-addons-delivery,
+  openerp7-addons-stock,
+  ${misc:Depends}
+Conflicts: openerp-addons-stock-invoice-directly
+Recommends: openerp7-server
+Description: OpenERP-7 module: stock_invoice_directly
+  Invoice Wizard for Delivery.
+  ============================
+  .
+  When you send or deliver goods, this module automatically launch the invoicing
+  wizard if the delivery is to be invoiced.
+
+Package: openerp7-addons-stock-location
+Section: net
+Architecture: all
+Depends:  openerp7-addons-procurement,
+  openerp7-addons-stock,
+  openerp7-addons-sale,
+  ${misc:Depends}
+Conflicts: openerp-addons-stock-location
+Recommends: openerp7-server
+Description: OpenERP-7 module: stock_location
+  This module supplements the Warehouse application by effectively implementing Push and Pull inventory flows.
+  ============================================================================================================
+  .
+  Typically this could be used to:
+  --------------------------------
+  * Manage product manufacturing chains
+  * Manage default locations per product
+  * Define routes within your warehouse according to business needs, such as:
+  - Quality Control
+  - After Sales Services
+  - Supplier Returns
+  .
+  * Help rental management, by generating automated return moves for rented products
+  .
+  Once this module is installed, an additional tab appear on the product form,
+  where you can add Push and Pull flow specifications. The demo data of CPU1
+  product for that push/pull :
+  .
+  Push flows:
+  -----------
+  Push flows are useful when the arrival of certain products in a given location
+  should always be followed by a corresponding move to another location, optionally
+  after a certain delay. The original Warehouse application already supports such
+  Push flow specifications on the Locations themselves, but these cannot be
+  refined per-product.
+  .
+  A push flow specification indicates which location is chained with which location,
+  and with what parameters. As soon as a given quantity of products is moved in the
+  source location, a chained move is automatically foreseen according to the
+  parameters set on the flow specification (destination location, delay, type of
+  move, journal). The new move can be automatically processed, or require a manual
+  confirmation, depending on the parameters.
+  .
+  Pull flows:
+  -----------
+  Pull flows are a bit different from Push flows, in the sense that they are not
+  related to the processing of product moves, but rather to the processing of
+  procurement orders. What is being pulled is a need, not directly products. A
+  classical example of Pull flow is when you have an Outlet company, with a parent
+  Company that is responsible for the supplies of the Outlet.
+  .
+  [ Customer ] <- A - [ Outlet ]  <- B -  [ Holding ] <~ C ~ [ Supplier ]
+  .
+  When a new procurement order (A, coming from the confirmation of a Sale Order
+  for example) arrives in the Outlet, it is converted into another procurement
+  (B, via a Pull flow of type 'move') requested from the Holding. When procurement
+  order B is processed by the Holding company, and if the product is out of stock,
+  it can be converted into a Purchase Order (C) from the Supplier (Pull flow of
+  type Purchase). The result is that the procurement order, the need, is pushed
+  all the way between the Customer and Supplier.
+  .
+  Technically, Pull flows allow to process procurement orders differently, not
+  only depending on the product being considered, but also depending on which
+  location holds the 'need' for that product (i.e. the destination location of
+  that procurement order).
+  .
+  Use-Case:
+  ---------
+  .
+  You can use the demo data as follow:
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  **CPU1:** Sell some CPU1 from Chicago Shop and run the scheduler
+  - Warehouse: delivery order, Chicago Shop: reception
+  **CPU3:**
+  - When receiving the product, it goes to Quality Control location then
+  stored to shelf 2.
+  - When delivering the customer: Pick List -> Packing -> Delivery Order from Gate A
+
+Package: openerp7-addons-stock-no-autopicking
+Section: net
+Architecture: all
+Depends:  openerp7-addons-mrp,
+  ${misc:Depends}
+Conflicts: openerp-addons-stock-no-autopicking
+Recommends: openerp7-server
+Description: OpenERP-7 module: stock_no_autopicking
+  This module allows an intermediate picking process to provide raw materials to production orders.
+  =================================================================================================
+  .
+  One example of usage of this module is to manage production made by your
+  suppliers (sub-contracting). To achieve this, set the assembled product which is
+  sub-contracted to 'No Auto-Picking' and put the location of the supplier in the
+  routing of the assembly operation.
+
+Package: openerp7-addons-subscription
+Section: net
+Architecture: all
+Depends:  ${misc:Depends}
+Conflicts: openerp-addons-subscription
+Recommends: openerp7-server
+Description: OpenERP-7 module: subscription
+  Create recurring documents.
+  ===========================
+  .
+  This module allows to create new documents and add subscriptions on that document.
+  .
+  e.g. To have an invoice generated automatically periodically:
+  -------------------------------------------------------------
+  * Define a document type based on Invoice object
+  * Define a subscription whose source document is the document defined as
+  above. Specify the interval information and partner to be invoice.
+
+Package: openerp7-addons-survey
+Section: net
+Architecture: all
+Depends:  openerp7-addons-mail,
+  ${misc:Depends}
+Conflicts: openerp-addons-survey
+Recommends: openerp7-server
+Description: OpenERP-7 module: survey
+  This module is used for surveying.
+  ==================================
+  .
+  It depends on the answers or reviews of some questions by different users. A
+  survey may have multiple pages. Each page may contain multiple questions and each
+  question may have multiple answers. Different users may give different answers of
+  question and according to that survey is done. Partners are also sent mails with
+  user name and password for the invitation of the survey.
+
+Package: openerp7-addons-warning
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  openerp7-addons-sale,
+  openerp7-addons-purchase,
+  ${misc:Depends}
+Conflicts: openerp-addons-warning
+Recommends: openerp7-server
+Description: OpenERP-7 module: warning
+  Module to trigger warnings in OpenERP objects.
+  ==============================================
+  .
+  Warning messages can be displayed for objects like sale order, purchase order,
+  picking and invoice. The message is triggered by the form's onchange event.
+
+Package: openerp7-addons-web-analytics
+Section: net
+Architecture: all
+Depends:  openerp7-addons-web,
+  ${misc:Depends}
+Conflicts: openerp-addons-web-analytics
+Recommends: openerp7-server
+Description: OpenERP-7 module: web_analytics
+  Google Analytics.
+  =================
+  .
+  Collects web application usage with Google Analytics.
+
+Package: openerp7-addons-web-linkedin
+Section: net
+Architecture: all
+Depends:  openerp7-addons-crm,
+  ${misc:Depends}
+Conflicts: openerp-addons-web-linkedin
+Recommends: openerp7-server
+Description: OpenERP-7 module: web_linkedin
+  OpenERP Web LinkedIn module.
+  ============================
+  This module provides the Integration of the LinkedIn with OpenERP.
+
+Package: openerp7-addons-web-shortcuts
+Section: net
+Architecture: all
+Depends:  openerp7-addons-base,
+  ${misc:Depends}
+Conflicts: openerp-addons-web-shortcuts
+Recommends: openerp7-server
+Description: OpenERP-7 module: web_shortcuts
+  Enable shortcuts feature in the web client.
+  ===========================================
+  .
+  Add a Shortcut icon in the systray in order to access the user's shortcuts (if any).
+  .
+  Add a Shortcut icon besides the views title in order to add/remove a shortcut.
+

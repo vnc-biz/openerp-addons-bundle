@@ -1,0 +1,9 @@
+/debian/files
+/debian/openerp-addons-bundle/
+/debian/openerp-addons-bundle.debhelper.log
+/debian/openerp-addons-bundle.postinst.debhelper
+/debian/openerp-addons-bundle.prerm.debhelper
+/debian/openerp-addons-bundle.substvars
+/dist/
+/npybabel.pyc
+/openerp_web.egg-info/

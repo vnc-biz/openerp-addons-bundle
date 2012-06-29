@@ -1,0 +1,5 @@
+openerp7-addons-bundle (7.0.1267-precise4) precise; urgency=low
+
+  * Ubuntu packaging
+
+ -- Enrico Weigelt, metux IT service <weigelt@metux.de>  Thu, 13 Apr 2013 22:34:00 +0100
